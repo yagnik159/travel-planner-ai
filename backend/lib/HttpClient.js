@@ -1,3 +1,5 @@
+const rootPrefix = '..';
+const ErrorResponse = require(rootPrefix + '/lib/ErrorResponse');
 const fetch = require('node-fetch');
 
 class HttpClient {
@@ -10,7 +12,6 @@ class HttpClient {
 
       const response = await fetch(url, requestOptions);
       const responseBody = await response.text();
-      const contentType = response.headers.get('content-type');
       const statusCode = response.status;
       const headersMap = {};
 
@@ -22,10 +23,24 @@ class HttpClient {
         }
       });
 
-      return new HttpResponse(statusCode, responseBody, headersMap, contentType);
+      const httpResponse = {
+        statusCode: statusCode,
+        headers: headersMap,
+        body: responseBody
+      }
+      return httpResponse;
+
     } catch (error) {
       console.error('Error making GET request:', error);
-      throw error;
+
+      const errorObject = new ErrorResponse(
+        'internal_server_error',
+        error,
+        'a_s_hc_mgr_1',
+        null
+      );
+
+      return errorObject.perform();
     }
   }
 
@@ -35,9 +50,9 @@ class HttpClient {
         method: 'POST',
         headers: {
           ...headers,
-          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(requestBody)
+        body: requestBody,
+        timeout: timeoutMillis
       };
 
       const response = await fetch(url, requestOptions);
@@ -62,7 +77,15 @@ class HttpClient {
       return httpResponse;
     } catch (error) {
       console.error('Error making POST request:', error);
-      throw error;
+
+      const errorObject = new ErrorResponse(
+        'internal_server_error',
+        error,
+        'a_s_hc_mpr_2',
+        null
+      );
+
+      return errorObject.perform();
     }
   }
 }
