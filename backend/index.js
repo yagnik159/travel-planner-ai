@@ -11,8 +11,18 @@ app.use(bodyParser.urlencoded({ extended: true, limit: "2mb" }));
 
 // Define your routes and other application logic here
 
-app.get("/api", function (request, response, next) {
-  response = perform(request, response, "/app/services/suggestion");
+app.post("/api/suggest-trip", function (request, response, next) {
+  const res = perform(request, response, "/app/services/Suggestion");
+
+  Promise.resolve(res).then((res) => {
+    if(res.status_code) {
+      const statusCode = parseInt(res.status_code);
+      response.status(statusCode).send(res);
+    }
+    else{
+      response.send(res);
+    }
+  });
 });
 
 function perform(req, res, serviceGetter) {
@@ -20,11 +30,11 @@ function perform(req, res, serviceGetter) {
 
   res = new Service(req, res).perform();
 
-  return;
+  return res;
 }
 
 // Start the Express server on port 3000
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`***Server is running on port ${PORT}`);
 });
