@@ -37,6 +37,19 @@ app.get("/api/search-city", function (request, response, next) {
   });
 });
 
+app.get("/api/poi", function (request, response, next) {
+  const res = perform(request, response, "/app/services/GetPoi");
+
+  Promise.resolve(res).then((res) => {
+    if (res.status_code) {
+      const statusCode = parseInt(res.status_code);
+      response.status(statusCode).send(res);
+    } else {
+      response.send(res);
+    }
+  });
+});
+
 function perform(req, res, serviceGetter) {
   const Service = require(rootPrefix + serviceGetter);
 
@@ -46,7 +59,7 @@ function perform(req, res, serviceGetter) {
 }
 
 // Start the Express server on port 3000
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.A_PORT || 3000;
 app.listen(PORT, () => {
   console.log(`***Server is running on port ${PORT}`);
 });

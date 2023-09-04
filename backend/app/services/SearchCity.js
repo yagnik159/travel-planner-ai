@@ -62,7 +62,6 @@ class SearchCity {
         const queryParams = {
             subType: "CITY",
             keyword: oThis.searchTerm,
-            view: "LIGHT",
             "page[limit]": 5,
         };
 
@@ -135,6 +134,10 @@ class SearchCity {
                 city_map_by_id[data[i].id] = {
                     id: data[i].id,
                     iatacode: data[i].iataCode,
+                    geocode:{
+                        latitude: data[i].geoCode.latitude,
+                        longitude: data[i].geoCode.longitude,
+                    },
                     name: data[i].address.cityName + ", " + data[i].address.countryName,
                 };
             }
