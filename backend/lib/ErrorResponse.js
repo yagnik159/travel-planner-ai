@@ -1,9 +1,9 @@
 const rootPrefix = '..';
 const apiErrorConfig = require(rootPrefix + '/config/apiErrorConfig');
 
-class ErrorResponse{
+class ErrorResponse {
 
-    constructor(apiIdentification, message, errorIdentifier, params){
+    constructor(apiIdentification, message, errorIdentifier, params) {
         const oThis = this;
         oThis.apiIdentification = apiIdentification;
         oThis.message = message;
@@ -11,7 +11,7 @@ class ErrorResponse{
         oThis.params = params;
     }
 
-    perform(){
+    perform() {
         const oThis = this;
 
         const errorConfig = apiErrorConfig[oThis.apiIdentification];

@@ -1,14 +1,9 @@
 const rootPrefix = "../..";
-const { json } = require("express");
-const fetch = require("node-fetch");
 const ErrorResponse = require(rootPrefix + "/lib/ErrorResponse");
-const Constant = require(rootPrefix + "/lib/globalConstants/constant");
-const HttpClient = require(rootPrefix + "/lib/HttpClient");
 const OpenAI = require("openai");
 
 class Suggestion {
   constructor(req, res) {
-    const oThis = this;
     this.req = req;
     this.res = {};
     this.destination = req.body.destination;
@@ -26,15 +21,15 @@ class Suggestion {
 
     await oThis._validateParameters();
 
-    if(oThis.res.status_code) return oThis.res;
+    if (oThis.res.status_code) return oThis.res;
 
     await oThis._makePrompt();
 
-    if(oThis.res.status_code) return oThis.res;
+    if (oThis.res.status_code) return oThis.res;
 
     await oThis._makePayload();
 
-    if(oThis.res.status_code) return oThis.res;
+    if (oThis.res.status_code) return oThis.res;
 
     await oThis._fetchSuggestions();
 
@@ -73,17 +68,15 @@ class Suggestion {
     if (!oThis.interests) {
       param_errors.push("missing_interests");
     }
+    else if (!Array.isArray(oThis.interests)) {
+      param_errors.push("invalid_interests");
+    }
 
     if (!oThis.cuisineTypes) {
       param_errors.push("missing_cuisine_types");
     }
-
-    if(!Array.isArray(oThis.cuisineTypes)){
+    else if (!Array.isArray(oThis.cuisineTypes)) {
       param_errors.push("invalid_cuisine_types");
-    }
-
-    if(!Array.isArray(oThis.interests)){
-      param_errors.push("invalid_interests");
     }
 
     if (param_errors.length > 0) {
@@ -123,30 +116,29 @@ class Suggestion {
     const prompt = {
       instructions: oThis.prompt,
       output_format: "json",
-      structure:{
-        "days": [
+      structure: {
+        days: [
           {
-            "title": "string", // Title of the day
-            "day": 1, // Day 1 or Day 2, represented as an integer
-            "activities": [
+            title: "string", // Title of the day
+            day: 1, // Day 1 or Day 2, represented as an integer
+            activities: [
               {
-                "local_time": "time", // Time of the activity
-                "location_name": "string", // Name of the location
-                "budget_inr": 100, // Budget for the activity in USD
-                "duration_min": 120, // Duration of the activity in minutes
-                "activity_types": ["type1", "type2"], // Types of the activity
-                "activity_description": "string" // Description of the activity
-              }
+                local_time: "time", // Time of the activity
+                location_name: "string", // Name of the location
+                budget_inr: 100, // Budget for the activity in USD
+                duration_min: 120, // Duration of the activity in minutes
+                activity_types: ["type1", "type2"], // Types of the activity
+                activity_description: "string", // Description of the activity
+              },
             ],
-            "day_summary": "string" // Summary of the day
-          }
-        ]
-      }
-    }
+            day_summary: "string", // Summary of the day
+          },
+        ],
+      },
+    };
 
     oThis.prompt_json = prompt;
   }
-
 
   async _fetchSuggestions() {
     const oThis = this;
@@ -155,23 +147,25 @@ class Suggestion {
 
     const openAi = new OpenAI(api_key);
 
-    const completion = await openAi.chat.completions.create({
-      messages: [{ role: "user", content: prompt_json }],
-      model: "gpt-3.5-turbo"
-    }).catch((err) => {
-      if(err instanceof OpenAI.APIError){
-        const errorObject = new ErrorResponse(
-          "openai_error",
-          err.message,
-          "a_s_s_s_2",
-          null
-        );
+    const completion = await openAi.chat.completions
+      .create({
+        messages: [{ role: "user", content: prompt_json }],
+        model: "gpt-3.5-turbo",
+      })
+      .catch((err) => {
+        if (err instanceof OpenAI.APIError) {
+          const errorObject = new ErrorResponse(
+            "openai_error",
+            err.message,
+            "a_s_s_s_2",
+            null
+          );
 
-        oThis.res = errorObject.perform();
-        return;
-      }
-    });
-    if(!completion) return;
+          oThis.res = errorObject.perform();
+          return;
+        }
+      });
+    if (!completion) return;
 
     const response = completion.choices;
 

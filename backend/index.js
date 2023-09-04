@@ -15,11 +15,23 @@ app.post("/api/suggest-trip", function (request, response, next) {
   const res = perform(request, response, "/app/services/Suggestion");
 
   Promise.resolve(res).then((res) => {
-    if(res.status_code) {
+    if (res.status_code) {
       const statusCode = parseInt(res.status_code);
       response.status(statusCode).send(res);
+    } else {
+      response.send(res);
     }
-    else{
+  });
+});
+
+app.get("/api/search-city", function (request, response, next) {
+  const res = perform(request, response, "/app/services/SearchCity");
+
+  Promise.resolve(res).then((res) => {
+    if (res.status_code) {
+      const statusCode = parseInt(res.status_code);
+      response.status(statusCode).send(res);
+    } else {
       response.send(res);
     }
   });
