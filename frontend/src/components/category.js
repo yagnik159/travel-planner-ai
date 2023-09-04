@@ -5,12 +5,12 @@ import Solo from "@/svg/solo";
 import React from "react";
 import { RadioButton, RadioGroup } from "react-radio-buttons";
 
-export default function Category() {
-  const onChange = (value) => {
-    console.log(value);
-  };
+export default function Category({ onChangeCallback }) {
   return (
-    <RadioGroup horizontal onChange={onChange}>
+    <RadioGroup
+      horizontal
+      onChange={(value) => onChangeCallback({ group_type: value })}
+    >
       <RadioButton
         value="solo"
         pointColor={"purple"}

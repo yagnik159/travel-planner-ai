@@ -1,5 +1,4 @@
-import styles from "@/styles/Home.module.css";
-import Link from "next/link";
+import { useCallback, useState } from "react";
 import AsyncSelect from "react-select/async";
 import DatePicker from "../components/date";
 import Spinner from "../components/spinner";
@@ -35,6 +34,49 @@ const loadOptions = (inputValue, callback) => {
 };
 
 export default function Plan() {
+  const [formParams, setFormParams] = useState({
+    destination: null,
+    start_date: null,
+    days: null,
+    budget: null,
+    group_type: null,
+    travelers: null,
+    interests: null,
+    cuisineTypes: null,
+  });
+  const [formParamsError, setFormParamsError] = useState({});
+
+  // console.log(formParams);
+
+  const updateFormParams = useCallback(
+    (newVal) => {
+      if (!newVal) return;
+      const [key] = Object.entries(newVal)[0];
+
+      setFormParams({ ...formParams, ...newVal });
+
+      setFormParamsError({ ...formParamsError, [key]: false });
+    },
+    [setFormParams, setFormParamsError, formParams, formParamsError]
+  );
+
+  const onFormSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+
+      let _formParamsError = {};
+
+      Object.keys(formParams).forEach((key) => {
+        if (!formParams[key]) {
+          _formParamsError = Object.assign(_formParamsError, { [key]: true });
+        }
+      });
+
+      setFormParamsError(_formParamsError);
+    },
+    [setFormParams, setFormParamsError, formParams, formParamsError]
+  );
+
   return (
     <>
       <Header />
@@ -45,7 +87,7 @@ export default function Plan() {
               <div className="text-2xl sm:text-4xl font-medium mb-8 sm:mb-12 font-IBMPlex">
                 Tell us your travel preferences
               </div>
-              <form className="flex flex-col gap-10">
+              <form className="flex flex-col gap-10" onSubmit={onFormSubmit}>
                 <div>
                   <div className="flex items-center gap-2 mb-4">
                     <div className="font-semibold text-base sm:text-lg md:text-lg">
@@ -58,12 +100,21 @@ export default function Plan() {
                       instanceId="selectbox"
                       cacheOptions
                       loadOptions={loadOptions}
+                      hideSelectedOptions={true}
                       defaultOptions
                       className="react-select-container"
                       classNamePrefix="react-select"
                       backspaceRemovesValue
                       isClearable
+                      onChange={(selectedVal) => {
+                        if (!selectedVal) return;
+                        const { value } = selectedVal;
+                        updateFormParams({ destination: value });
+                      }}
                     />
+                    {formParamsError?.destination ? (
+                      <div>Please select a destination</div>
+                    ) : null}
                   </div>
                 </div>
                 <hr className="my-8"></hr>
@@ -74,8 +125,11 @@ export default function Plan() {
                     </div>
                   </div>
                   <div className="border">
-                    <DatePicker />
+                    <DatePicker onChangeCallback={updateFormParams} />
                   </div>
+                  {formParamsError?.start_date ? (
+                    <div>Please select the start date your of your journey</div>
+                  ) : null}
                 </div>
                 <hr className="my-8"></hr>
                 <div>
@@ -86,8 +140,11 @@ export default function Plan() {
                   </div>
                   <div className="flex justify-between">
                     <div className="text-lg md:text-lg">Day</div>
-                    <Spinner />
+                    <Spinner onChangeCallback={updateFormParams} />
                   </div>
+                  {formParamsError?.travelers ? (
+                    <div>Please select atleast one of traveler</div>
+                  ) : null}
                 </div>
                 <hr className="my-8"></hr>
                 <div>
@@ -101,7 +158,10 @@ export default function Plan() {
                     </p>
                   </div>
                   <div className="category">
-                    <Budget />
+                    <Budget onChangeCallback={updateFormParams} />
+                    {formParamsError?.budget ? (
+                      <div>Please select a destination</div>
+                    ) : null}
                   </div>
                 </div>
                 <hr className="my-8"></hr>
@@ -112,7 +172,10 @@ export default function Plan() {
                     </div>
                   </div>
                   <div className="category">
-                    <Category />
+                    <Category onChangeCallback={updateFormParams} />
+                    {formParamsError?.group_type ? (
+                      <div>Please select a destination</div>
+                    ) : null}
                   </div>
                 </div>
                 <hr className="my-8"></hr>
@@ -123,7 +186,10 @@ export default function Plan() {
                     </div>
                   </div>
                   <div className="category">
-                    <Activities />
+                    <Activities onChangeCallback={updateFormParams} />
+                    {formParamsError?.interests ? (
+                      <div>Please select a destination</div>
+                    ) : null}
                   </div>
                 </div>
                 <hr className="my-8"></hr>
@@ -134,13 +200,16 @@ export default function Plan() {
                     </div>
                   </div>
                   <div className="">
-                    <SelectOptions />
+                    <SelectOptions onChangeCallback={updateFormParams} />
+                    {formParamsError?.cuisineTypes ? (
+                      <div>Please select a destination</div>
+                    ) : null}
                   </div>
                 </div>
-                <div class="w-full fixed bottom-0 left-0 py-4 border-t-2 bg-white border-gray-300 px-4 flex justify-end">
+                <div className="w-full fixed bottom-0 left-0 py-4 border-t-2 bg-white border-gray-300 px-4 flex justify-end">
                   <button
                     type="submit"
-                    class="bg-zinc-900 rounded-lg text-white font-medium py-3 px-8 w-fit text-center flex items-center justify-center gap-2 text-sm sm:text-base hover:opacity-90 transition-all duration-300"
+                    className="bg-zinc-900 rounded-lg text-white font-medium py-3 px-8 w-fit text-center flex items-center justify-center gap-2 text-sm sm:text-base hover:opacity-90 transition-all duration-300"
                   >
                     Submit
                   </button>

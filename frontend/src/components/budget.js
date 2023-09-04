@@ -2,13 +2,12 @@ import React from "react";
 import { RadioButton, RadioGroup } from "react-radio-buttons";
 import CurrencySvg from "@/svg/currency";
 
-export default function Budget() {
-  const onChange = (value) => {
-    console.log(value);
-  };
-
+export default function Budget({ onChangeCallback }) {
   return (
-    <RadioGroup horizontal onChange={onChange}>
+    <RadioGroup
+      horizontal
+      onChange={(value) => onChangeCallback({ budget: value })}
+    >
       <RadioButton
         value="0-500"
         pointColor={"purple"}
@@ -34,7 +33,7 @@ export default function Budget() {
         <div className="text-sm text-gray-500 text-left">500 - 2500 USD</div>
       </RadioButton>
       <RadioButton
-        value="2500>"
+        value="2500+"
         pointColor={"purple"}
         iconSize={20}
         iconInnerSize={10}

@@ -2,7 +2,7 @@ import React from "react";
 import "flatpickr/dist/themes/light.css";
 import Flatpickr from "react-flatpickr";
 
-export default function DatePicker() {
+export default function DatePicker({ onChangeCallback }) {
   return (
     <Flatpickr
       name="goodsreadyby"
@@ -12,10 +12,10 @@ export default function DatePicker() {
         minDate: "today",
         maxDate: new Date().fp_incr(15),
       }}
-      onChange={(selectedDates, dateStr, instance) => {
-        const firstDate = selectedDates[0];
-        // console.log(firstDate, dateStr);
+      onChange={(_, dateStr) => {
+        onChangeCallback({ start_date: dateStr });
       }}
+      required
     />
   );
 }
