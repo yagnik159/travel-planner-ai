@@ -148,7 +148,7 @@ a {
   margin-right: 0 !important;
 }
 
-label::before {
+.fullContainer::before {
   position: absolute;
   content: "";
   z-index: -1;
@@ -162,6 +162,6 @@ label::before {
   border-radius: 6px;
 }
 
-input:checked + label::before {
+input:checked + .fullContainer::before {
   border: 2px solid purple;
 }
