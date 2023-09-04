@@ -33,6 +33,10 @@ class Suggestion {
 
     await oThis._fetchSuggestions();
 
+    if (oThis.res.status_code) return oThis.res;
+
+    await oThis._formatResponse();
+
     return oThis.res;
   }
 
@@ -171,7 +175,39 @@ class Suggestion {
 
     const content = JSON.parse(response[0].message.content);
 
-    oThis.res = content;
+    oThis.responseBody = content;
+  }
+
+  async _formatResponse() {
+    const oThis = this;
+
+    const days = oThis.responseBody.days;
+
+    const formattedDays = days.map((day) => {
+      const activities = day.activities.map((activity) => {
+        return {
+          local_time: activity.local_time,
+          location_name: activity.location_name,
+          budget_inr: activity.budget_inr,
+          duration_min: activity.duration_min,
+          activity_types: activity.activity_types,
+          activity_description: activity.activity_description,
+        };
+      });
+
+      return {
+        title: day.title,
+        day: day.day,
+        activities: activities,
+        day_summary: day.day_summary,
+      };
+    });
+
+    const response = {
+      days: formattedDays
+    };
+
+    oThis.res = response;
   }
 }
 
