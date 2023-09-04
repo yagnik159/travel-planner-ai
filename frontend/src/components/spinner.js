@@ -16,7 +16,7 @@ export default function Spinner({ onChangeCallback }) {
       mobile
       onChange={(val) => {
         setTravelers(val || 1);
-        onChangeCallback({ travelers: val });
+        onChangeCallback({ travelers });
       }}
     />
   );

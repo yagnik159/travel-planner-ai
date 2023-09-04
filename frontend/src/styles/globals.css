@@ -165,3 +165,12 @@ a {
 input:checked + .fullContainer::before {
   border: 2px solid purple;
 }
+
+.form-error{
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 0;
+  text-align: left;
+  height: 18px;
+}

@@ -6,15 +6,22 @@ import NightLifeSvg from "@/svg/nightLife";
 import RestaurantSvg from "@/svg/restaurant";
 import ShoppingSvg from "@/svg/shopping";
 import SpaSvg from "@/svg/spa";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function Activities() {
-  const [email, setEmail] = useState("");
+export default function Activities({ onChangeCallback }) {
+  const [activities, setActivities] = useState([]);
 
   const onChange = (e) => {
-    setEmail(e.target.value);
-    console.log("=========target.valu==========", e.target.value);
+    if (e.target.checked) {
+      setActivities([...activities, e.target.value]);
+    } else {
+      setActivities(activities.filter((item) => item !== e.target.value));
+    }
   };
+
+  useEffect(() => {
+    onChangeCallback({ activities });
+  }, [activities]);
 
   return (
     <div className="grid gird-cols-3 gap-[30px]">

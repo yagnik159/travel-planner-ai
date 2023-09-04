@@ -40,7 +40,7 @@ export default function Plan() {
     days: null,
     budget: null,
     group_type: null,
-    travelers: null,
+    travelers: 1,
     interests: null,
     cuisineTypes: null,
   });
@@ -112,12 +112,14 @@ export default function Plan() {
                         updateFormParams({ destination: value });
                       }}
                     />
-                    {formParamsError?.destination ? (
-                      <div>Please select a destination</div>
-                    ) : null}
+                    <div className="form-error">
+                      {formParamsError?.destination
+                        ? "Please select the destination of your choice*"
+                        : null}
+                    </div>
                   </div>
                 </div>
-                <hr className="my-8"></hr>
+                <hr className="my-7"></hr>
                 <div>
                   <div className="flex items-center gap-2 mb-4">
                     <div className="font-semibold text-base sm:text-lg md:text-lg">
@@ -127,11 +129,13 @@ export default function Plan() {
                   <div className="border">
                     <DatePicker onChangeCallback={updateFormParams} />
                   </div>
-                  {formParamsError?.start_date ? (
-                    <div>Please select the start date your of your journey</div>
-                  ) : null}
+                  <div className="form-error">
+                    {formParamsError?.start_date
+                      ? "Please select the start date your of your journey*"
+                      : null}
+                  </div>
                 </div>
-                <hr className="my-8"></hr>
+                <hr className="my-7"></hr>
                 <div>
                   <div className="flex items-center gap-2 mb-4">
                     <div className="font-semibold text-base sm:text-lg md:text-lg">
@@ -142,11 +146,13 @@ export default function Plan() {
                     <div className="text-lg md:text-lg">Day</div>
                     <Spinner onChangeCallback={updateFormParams} />
                   </div>
-                  {formParamsError?.travelers ? (
-                    <div>Please select atleast one of traveler</div>
-                  ) : null}
+                  <div className="form-error">
+                    {formParamsError?.travelers
+                      ? "Please select atleast one of traveler*"
+                      : null}
+                  </div>
                 </div>
-                <hr className="my-8"></hr>
+                <hr className="my-7"></hr>
                 <div>
                   <div className="flex flex-col items-start gap-2 mb-4">
                     <div className="font-semibold text-base sm:text-lg md:text-lg mb-[10px]">
@@ -159,12 +165,14 @@ export default function Plan() {
                   </div>
                   <div className="category">
                     <Budget onChangeCallback={updateFormParams} />
-                    {formParamsError?.budget ? (
-                      <div>Please select a destination</div>
-                    ) : null}
+                    <div className="form-error">
+                      {formParamsError?.budget
+                        ? "Please select a destination*"
+                        : null}
+                    </div>
                   </div>
                 </div>
-                <hr className="my-8"></hr>
+                <hr className="my-7"></hr>
                 <div>
                   <div className="flex flex-col items-start gap-2 mb-4">
                     <div className="font-semibold text-base sm:text-lg md:text-lg mb-[10px]">
@@ -173,12 +181,14 @@ export default function Plan() {
                   </div>
                   <div className="category">
                     <Category onChangeCallback={updateFormParams} />
-                    {formParamsError?.group_type ? (
-                      <div>Please select a destination</div>
-                    ) : null}
+                    <div className="form-error">
+                      {formParamsError?.group_type
+                        ? "Please select a destination*"
+                        : null}
+                    </div>
                   </div>
                 </div>
-                <hr className="my-8"></hr>
+                <hr className="my-7"></hr>
                 <div>
                   <div className="flex flex-col items-start gap-2 mb-4">
                     <div className="font-semibold text-base sm:text-lg md:text-lg mb-[10px]">
@@ -187,12 +197,14 @@ export default function Plan() {
                   </div>
                   <div className="category">
                     <Activities onChangeCallback={updateFormParams} />
-                    {formParamsError?.interests ? (
-                      <div>Please select a destination</div>
-                    ) : null}
+                    <div className="form-error">
+                      {formParamsError?.interests
+                        ? "Please select a destination*"
+                        : null}
+                    </div>
                   </div>
                 </div>
-                <hr className="my-8"></hr>
+                <hr className="my-7"></hr>
                 <div>
                   <div className="flex flex-col items-start gap-2 mb-4">
                     <div className="font-semibold text-base sm:text-lg md:text-lg mb-[10px]">
@@ -201,9 +213,11 @@ export default function Plan() {
                   </div>
                   <div className="">
                     <SelectOptions onChangeCallback={updateFormParams} />
-                    {formParamsError?.cuisineTypes ? (
-                      <div>Please select a destination</div>
-                    ) : null}
+                    <div className="form-error">
+                      {formParamsError?.cuisineTypes
+                        ? "Please select a destination*"
+                        : null}
+                    </div>
                   </div>
                 </div>
                 <div className="w-full fixed bottom-0 left-0 py-4 border-t-2 bg-white border-gray-300 px-4 flex justify-end">
