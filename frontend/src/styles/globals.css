@@ -174,3 +174,33 @@ input:checked + .fullContainer::before {
   text-align: left;
   height: 18px;
 }
+
+.cityInput{
+  width: 100%;
+  margin-right: 0 !important;
+  border: 1px solid #e5e7eb;
+  height: 44px;
+  padding: 0 10px;
+  font-size: 18px;
+}
+
+.citySearchModal{
+  position: absolute;
+    z-index: 1;
+    background: white;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    top: 50px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.citySearchModal > div{
+  padding: 10px 0;
+  border-bottom: 1px solid #e5e7eb;
+  cursor: pointer;
+}
+
+.relative{
+  position: relative;
+}

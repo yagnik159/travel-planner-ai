@@ -7,31 +7,7 @@ import Budget from "@/components/budget";
 import Category from "@/components/category";
 import Activities from "@/components/activities";
 import SelectOptions from "@/components/options";
-
-export const colourOptions = [
-  { value: "ocean", label: "Ocean", color: "#00B8D9", isFixed: true },
-  { value: "blue", label: "Blue", color: "#0052CC", isDisabled: true },
-  { value: "purple", label: "Purple", color: "#5243AA" },
-  { value: "red", label: "Red", color: "#FF5630", isFixed: true },
-  { value: "orange", label: "Orange", color: "#FF8B00" },
-  { value: "yellow", label: "Yellow", color: "#FFC400" },
-  { value: "green", label: "Green", color: "#36B37E" },
-  { value: "forest", label: "Forest", color: "#00875A" },
-  { value: "slate", label: "Slate", color: "#253858" },
-  { value: "silver", label: "Silver", color: "#666666" },
-];
-
-const filterColors = (inputValue) => {
-  return colourOptions.filter((i) =>
-    i.label.toLowerCase().includes(inputValue.toLowerCase())
-  );
-};
-
-const loadOptions = (inputValue, callback) => {
-  setTimeout(() => {
-    callback(filterColors(inputValue));
-  }, 1000);
-};
+import axios from "axios";
 
 export default function Plan() {
   const [formParams, setFormParams] = useState({
@@ -44,9 +20,47 @@ export default function Plan() {
     interests: null,
     cuisineTypes: null,
   });
+
   const [formParamsError, setFormParamsError] = useState({});
 
-  // console.log(formParams);
+  const [cityOptions, setCityOptions] = useState([]);
+
+  const [selectedCity, setSelectedCity] = useState(null);
+
+  const [cityInput, setCityInput] = useState("");
+
+  const fetchCity = async (inputValue) => {
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/search-city?q=${inputValue}`
+    );
+
+    const cityData = res.data;
+
+    const options = cityData.city_id.map((cityId) => {
+      return {
+        value: cityData.city_map_by_id[cityId].name,
+        label: cityData.city_map_by_id[cityId].id,
+        ...cityData.city_map_by_id[cityId],
+      };
+    });
+
+    return options || [];
+  };
+
+  const onSearchCity = useCallback(
+    async (e) => {
+      const value = e.target.value;
+
+      setCityInput(value);
+
+      if (!value || value.length < 3) return;
+
+      const _cityOptions = await fetchCity(value);
+
+      setCityOptions(_cityOptions);
+    },
+    [setCityInput]
+  );
 
   const updateFormParams = useCallback(
     (newVal) => {
@@ -94,24 +108,35 @@ export default function Plan() {
                       What is destination of choice?
                     </div>
                   </div>
-                  <div>
-                    <AsyncSelect
-                      id="selectbox"
-                      instanceId="selectbox"
-                      cacheOptions
-                      loadOptions={loadOptions}
-                      hideSelectedOptions={true}
-                      defaultOptions
-                      className="react-select-container"
-                      classNamePrefix="react-select"
-                      backspaceRemovesValue
-                      isClearable
-                      onChange={(selectedVal) => {
-                        if (!selectedVal) return;
-                        const { value } = selectedVal;
-                        updateFormParams({ destination: value });
-                      }}
+                  <div className="relative">
+                    <input
+                      type="search"
+                      value={cityInput}
+                      className="cityInput"
+                      onChange={onSearchCity}
                     />
+                    {cityOptions && cityOptions.length > 0 ? (
+                      <div className="citySearchModal">
+                        {cityOptions.map((_city) => {
+                          return (
+                            <div
+                              key={_city.id}
+                              onClick={() => {
+                                setSelectedCity(_city);
+                                setCityInput(_city.name);
+                                updateFormParams({
+                                  destination: _city.name,
+                                });
+                                setCityOptions([]);
+                              }}
+                            >
+                              {_city.name}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ) : null}
+
                     <div className="form-error">
                       {formParamsError?.destination
                         ? "Please select the destination of your choice*"
