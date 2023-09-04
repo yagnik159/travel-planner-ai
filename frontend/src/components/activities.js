@@ -27,7 +27,7 @@ export default function Activities() {
           onChange={onChange}
           className="absolute w-full h-full left-0 right-0 top-0 bottom-0 opacity-0 cursor-pointer"
         />
-        <label className="mt-2 text-sm sm:text-base font-medium fullContainer">
+        <label className="mt-[10px] block text-sm sm:text-base font-medium fullContainer">
           Beaches
         </label>
       </div>
@@ -40,7 +40,7 @@ export default function Activities() {
           onChange={onChange}
           className="absolute w-full h-full left-0 right-0 top-0 bottom-0 opacity-0 cursor-pointer"
         />
-        <label className="mt-2 text-sm sm:text-base font-medium fullContainer">
+        <label className="mt-[10px] block text-sm sm:text-base font-medium fullContainer">
           City sightseeing
         </label>
       </div>
@@ -53,7 +53,7 @@ export default function Activities() {
           onChange={onChange}
           className="absolute w-full h-full left-0 right-0 top-0 bottom-0 opacity-0 cursor-pointer"
         />
-        <label className="mt-2 text-sm sm:text-base font-medium fullContainer">
+        <label className="mt-[10px] block text-sm sm:text-base font-medium fullContainer">
           Outdoor adventures
         </label>
       </div>
@@ -67,7 +67,7 @@ export default function Activities() {
           onChange={onChange}
           className="absolute w-full h-full left-0 right-0 top-0 bottom-0 opacity-0 cursor-pointer"
         />
-        <label className="mt-2 text-sm sm:text-base font-medium fullContainer">
+        <label className="mt-[10px] block text-sm sm:text-base font-medium fullContainer">
           Festivals/events
         </label>
       </div>
@@ -81,7 +81,7 @@ export default function Activities() {
           onChange={onChange}
           className="absolute w-full h-full left-0 right-0 top-0 bottom-0 opacity-0 cursor-pointer"
         />
-        <label className="mt-2 text-sm sm:text-base font-medium fullContainer">
+        <label className="mt-[10px] block text-sm sm:text-base font-medium fullContainer">
           Food exploration
         </label>
       </div>
@@ -95,7 +95,7 @@ export default function Activities() {
           onChange={onChange}
           className="absolute w-full h-full left-0 right-0 top-0 bottom-0 opacity-0 cursor-pointer"
         />
-        <label className="mt-2 text-sm sm:text-base font-medium fullContainer">
+        <label className="mt-[10px] block text-sm sm:text-base font-medium fullContainer">
           Nightlife
         </label>
       </div>
@@ -109,7 +109,7 @@ export default function Activities() {
           onChange={onChange}
           className="absolute w-full h-full left-0 right-0 top-0 bottom-0 opacity-0 cursor-pointer"
         />
-        <label className="mt-2 text-sm sm:text-base font-medium fullContainer">
+        <label className="mt-[10px] block text-sm sm:text-base font-medium fullContainer">
           Shopping
         </label>
       </div>
@@ -123,7 +123,7 @@ export default function Activities() {
           onChange={onChange}
           className="absolute w-full h-full left-0 right-0 top-0 bottom-0 opacity-0 cursor-pointer"
         />
-        <label className="mt-2 text-sm sm:text-base font-medium fullContainer">
+        <label className="mt-[10px] block text-sm sm:text-base font-medium fullContainer">
           Spa wellness
         </label>
       </div>
