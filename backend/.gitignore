@@ -14,8 +14,7 @@
 *.tgz
 
 # dotenv environment variables file
-.env
-.env.test
+set_env_vars.sh
 
 # Runtime data
 pids
