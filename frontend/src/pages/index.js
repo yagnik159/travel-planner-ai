@@ -38,9 +38,9 @@ export default function Home() {
           </p>
           <Link
             href="/plan"
-            className="bg-[#000] text-[#fff] text-[16px] px-[2rem] py-[1rem] rounded-full inline-block"
+            className="bg-[#000] text-[#fff] border-2 text-[18px] font-medium px-[2rem] py-[1rem] inline-block hover:bg-transparent hover:border-black hover:text-[#000] transition tracking-wider"
           >
-            Plan Now for free
+            Plan Now to Travel
           </Link>
         </div>
       </main>
