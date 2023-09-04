@@ -4,11 +4,12 @@ const MakeAmadeusRequest = require(rootPrefix + "/lib/helper/MakeAmadeusRequest"
 const constants = require(rootPrefix + "/lib/globalConstants/Constants");
 const URL = require("url");
 
-class SearchCity {
+class GetPoi {
     constructor(req, res) {
         this.req = req;
         this.res = {};
-        this.searchTerm = req.query.q;
+        this.latitude = req.query.latitude;
+        this.longitude = req.query.longitude;
     }
 
     async perform() {
@@ -32,10 +33,16 @@ class SearchCity {
 
         let param_errors = [];
 
-        if (!oThis.searchTerm) {
-            param_errors.push("missing_search_term");
-        } else if (oThis.searchTerm.length < 3) {
-            param_errors.push("search_term_too_short");
+        if (!oThis.latitude) {
+            param_errors.push("missing_latitude");
+        } else if (oThis.latitude < -90 || oThis.latitude > 90) {
+            param_errors.push("invalid_latitude");
+        }
+
+        if (!oThis.longitude) {
+            param_errors.push("missing_longitude");
+        } else if (oThis.longitude < -180 || oThis.longitude > 180) {
+            param_errors.push("invalid_longitude");
         }
 
         if (param_errors.length > 0) {
@@ -52,13 +59,13 @@ class SearchCity {
     async _makeRequest() {
         const oThis = this;
 
-        const url = constants.searchCityUrl;
+        const url = constants.searchPoiUrl;
 
         const queryParams = {
-            subType: "CITY",
-            keyword: oThis.searchTerm,
-            "page[limit]": 5,
-        };
+            latitude: oThis.latitude,
+            longitude: oThis.longitude,
+            radius: 10,
+        }
 
         const getUrl = URL.format({
             pathname: url,
@@ -69,48 +76,41 @@ class SearchCity {
 
         if (response.status_code) {
             oThis.res = response;
-            return;
         } else {
             oThis.responseBody = response;
         }
+
+
     }
 
     async _formatResponse() {
         const oThis = this;
 
-        const city_id = [];
-        const city_map_by_id = {};
+        const poi_id = [];
+        const poi_map_by_id = {};
+
         try {
             const data = oThis.responseBody.data;
 
             for (let i = 0; i < data.length; i++) {
-                city_id.push(data[i].id);
-                city_map_by_id[data[i].id] = {
+                poi_id.push(data[i].id);
+                poi_map_by_id[data[i].id] = {
                     id: data[i].id,
-                    iatacode: data[i].iataCode,
-                    geocode: {
-                        latitude: data[i].geoCode.latitude,
-                        longitude: data[i].geoCode.longitude,
-                    },
-                    name: data[i].address.cityName + ", " + data[i].address.countryName,
+                    name: data[i].name,
+                    category: data[i].category,
+                    tags: data[i].tags,
                 };
             }
 
             oThis.res = {
-                city_id: city_id,
-                city_map_by_id: city_map_by_id,
+                poi_id: poi_id,
+                poi_map_by_id: poi_map_by_id,
             };
+
         } catch (error) {
-            const errorObject = new ErrorResponse(
-                "internal_server_error",
-                error,
-                "a_s_sc_sc_4",
-                null
-            );
-            oThis.res = errorObject.perform();
-            return;
+            
         }
     }
 }
 
-module.exports = SearchCity;
+module.exports = GetPoi;

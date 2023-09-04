@@ -1,5 +1,6 @@
 const rootPrefix = ".";
 const express = require("express");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const app = express();
 
@@ -8,6 +9,13 @@ app.use(bodyParser.json({ limit: "2mb" }));
 
 // Middleware for parsing URL-encoded data with extended set to true and a limit of 2mb
 app.use(bodyParser.urlencoded({ extended: true, limit: "2mb" }));
+
+// Middleware for enabling CORS
+const corsOptions = {
+  origin: '*'
+};
+
+app.use(cors(corsOptions));
 
 // Define your routes and other application logic here
 

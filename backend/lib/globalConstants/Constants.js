@@ -21,6 +21,9 @@ class Constants{
         return this.amadeusBaseUrl + '/v1/reference-data/locations';
     }
 
+    get searchPoiUrl(){
+        return this.amadeusBaseUrl + '/v1/reference-data/locations/pois';
+    }
 
 }
 
