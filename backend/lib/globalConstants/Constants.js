@@ -25,6 +25,10 @@ class Constants{
         return this.amadeusBaseUrl + '/v1/reference-data/locations/pois';
     }
 
+    get searchHotelUrl(){
+        return 'https://airbnb13.p.rapidapi.com/search-location';
+    }
+
 }
 
 module.exports = new Constants();

@@ -98,18 +98,16 @@ class GetPoi {
                     id: data[i].id,
                     name: data[i].name,
                     category: data[i].category,
-                    tags: data[i].tags,
                 };
             }
-
-            oThis.res = {
-                poi_id: poi_id,
-                poi_map_by_id: poi_map_by_id,
-            };
-
-        } catch (error) {
-            
+        }catch(err){
+            console.log(err);
         }
+
+        oThis.res = {
+            poi_id: poi_id,
+            poi_map_by_id: poi_map_by_id,
+        };
     }
 }
 
