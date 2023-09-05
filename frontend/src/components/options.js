@@ -12,7 +12,7 @@ const SelectOptions = ({ onChangeCallback }) => {
   };
 
   useEffect(() => {
-    onChangeCallback({ cuisineTypes });
+    onChangeCallback({ cuisine_types: cuisineTypes });
   }, [cuisineTypes]);
 
   return (
