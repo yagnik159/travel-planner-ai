@@ -72,6 +72,20 @@ app.get("/api/hotels", function (request, response, next) {
   });
 });
 
+app.get("/api/city-details", function (request, response, next) {
+  const res = perform(request, response, "/app/services/GetCityDetails");
+
+  Promise.resolve(res).then((res) => {
+    if(res.status_code) {
+      const statusCode = parseInt(res.status_code);
+      response.status(statusCode).send(res);
+    } else {
+      response.send(res);
+    
+    }
+  });
+});
+
 function perform(req, res, serviceGetter) {
   const Service = require(rootPrefix + serviceGetter);
 

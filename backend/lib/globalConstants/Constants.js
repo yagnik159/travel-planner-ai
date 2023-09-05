@@ -29,6 +29,10 @@ class Constants{
         return 'https://airbnb13.p.rapidapi.com/search-location';
     }
 
+    get cityPhotoUrl(){
+        return 'https://api.unsplash.com/search/photos';
+    }
+
 }
 
 module.exports = new Constants();
