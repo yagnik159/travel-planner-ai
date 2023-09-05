@@ -58,3 +58,11 @@
   height: 100vh; */
   box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.1);
 }
+
+.heroCta {
+  background: linear-gradient(90deg, #d33751 0%, #d13761 49.11%, #c62c66 100%);
+}
+
+.heroCta:hover {
+  background: linear-gradient(180deg, #c62c66 0%, #d13761 49.11%, #d33751 100%);
+}
