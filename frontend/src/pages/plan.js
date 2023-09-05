@@ -9,6 +9,7 @@ import Activities from "@/components/activities";
 import SelectOptions from "@/components/options";
 import axios from "axios";
 import TripPlan from "@/components/tripPlan";
+import Loader from "@/components/loader";
 
 export default function Plan() {
   const [formParams, setFormParams] = useState({
@@ -118,11 +119,11 @@ export default function Plan() {
     [setFormParams, setFormParamsError, formParams, formParamsError]
   );
 
-  if (loader) {
+  if (true) {
     return (
       <>
         <Header />
-        <div className="text-center flex-1">loading...</div>
+        <Loader />
       </>
     );
   }
