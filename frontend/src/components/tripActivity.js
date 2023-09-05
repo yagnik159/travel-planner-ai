@@ -1,4 +1,8 @@
 import React from "react";
+import ActivitySvg from "@/svg/activity";
+import DurationSvg from "@/svg/duration";
+import RupeeSvg from "@/svg/rupee";
+import StartAtSvg from "@/svg/startAt";
 
 function TripActivity({ activity }) {
   const {
@@ -10,13 +14,29 @@ function TripActivity({ activity }) {
     local_time = "",
   } = activity;
   return (
-    <div>
-      <div>{location_name}</div>
-      <div>{activity_description}</div>
-      <div>Start at : {local_time}</div>
-      <div>Duration: {duration_min}</div>
-      <div>Activity Type: {activity_types.join(", ")}</div>
-      {budget_inr > 0 ? <div>{budget_inr}</div> : null}
+    <div className="border p-[15px] rounded-md">
+      <div className="font-medium text-[20px] underline">{location_name}</div>
+      <div className="mb-4 font-base text-sm md:text-base svelte-1hpiyon">
+        {activity_description}
+      </div>
+      <div className="flex flex-col gap-[10px]">
+        <div className="flex items-center gap-[8px] capitalize">
+          {" "}
+          <StartAtSvg /> {local_time}
+        </div>
+        <div className="flex items-center gap-[8px] capitalize">
+          <DurationSvg /> {duration_min} minutes
+        </div>
+        <div className="flex items-center gap-[8px] capitalize">
+          <ActivitySvg /> {activity_types.join(", ")}
+        </div>
+        {budget_inr > 0 ? (
+          <div className="flex items-center gap-[8px] capitalize">
+            <RupeeSvg />
+            {budget_inr}
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }
