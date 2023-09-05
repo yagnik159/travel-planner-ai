@@ -119,7 +119,7 @@ export default function Plan() {
     [setFormParams, setFormParamsError, formParams, formParamsError]
   );
 
-  if (true) {
+  if (loader) {
     return (
       <>
         <Header />
