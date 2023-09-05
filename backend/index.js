@@ -58,6 +58,20 @@ app.get("/api/poi", function (request, response, next) {
   });
 });
 
+app.get("/api/hotels", function (request, response, next) {
+  const res = perform(request, response, "/app/services/GetHotels");
+
+  Promise.resolve(res).then((res) => {
+    if(res.status_code) {
+      const statusCode = parseInt(res.status_code);
+      response.status(statusCode).send(res);
+    } else {
+      response.send(res);
+    
+    }
+  });
+});
+
 function perform(req, res, serviceGetter) {
   const Service = require(rootPrefix + serviceGetter);
 
