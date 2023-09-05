@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NumericInput from "react-numeric-input";
 
 export default function Spinner({ onChangeCallback }) {
-  const [travelers, setTravelers] = useState(1);
+  const [travelDuration, setTravelDuration] = useState(1);
+
+  useEffect(() => {
+    onChangeCallback({ days: travelDuration });
+  }, [travelDuration]);
 
   return (
     <NumericInput
       className="form-control font-bold"
-      value={travelers}
+      value={travelDuration}
       min={1}
       max={50}
       step={1}
@@ -15,8 +19,7 @@ export default function Spinner({ onChangeCallback }) {
       size={5}
       mobile
       onChange={(val) => {
-        setTravelers(val || 1);
-        onChangeCallback({ travelers });
+        setTravelDuration(val || 1);
       }}
     />
   );

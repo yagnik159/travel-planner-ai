@@ -18,7 +18,7 @@ export default function Home() {
       <main className={styles.main}>
         <Header />
         <div
-          className="text-center flex flex-col items-center justify-center"
+          className={`text-center flex flex-col items-center justify-center h-full w-full ${styles.heroContainer}`}
           style={{ minHeight: "calc(100vh - 80px)" }}
         >
           <h1
@@ -32,7 +32,7 @@ export default function Home() {
               </div>
             </div>
           </h1>
-          <p className="sm:leading-9 text-sm sm:text-lg mb-8 sm:mb-12 whitespace-break-spaces text-white sm:text-zinc-900 text-center">
+          <p className="sm:leading-9 text-sm sm:text-[20px] mb-8 sm:mb-12 whitespace-break-spaces text-white sm:text-zinc-900 text-center">
             AI-powered travel planner that creates personalized itineraries
             based on your interests and budget.
           </p>

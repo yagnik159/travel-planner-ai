@@ -49,3 +49,12 @@
     background-position: 0 50%;
   }
 }
+
+.heroContainer {
+  background-image: url(/scenic.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* width: 100vw;
+  height: 100vh; */
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.1);
+}

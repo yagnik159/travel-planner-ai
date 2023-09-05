@@ -9,7 +9,7 @@ export default function Budget({ onChangeCallback }) {
       onChange={(value) => onChangeCallback({ budget: value })}
     >
       <RadioButton
-        value="0-500"
+        value="0-10000"
         pointColor={"purple"}
         iconSize={20}
         iconInnerSize={10}
@@ -18,10 +18,10 @@ export default function Budget({ onChangeCallback }) {
         <div className="mt-4 text-base text-black font-semibold text-left">
           Low
         </div>
-        <div className="text-sm text-gray-500 text-left">0 - 500 USD</div>
+        <div className="text-sm text-gray-500 text-left">0 - 10000 INR</div>
       </RadioButton>
       <RadioButton
-        value="500-2500"
+        value="10000-25000"
         pointColor={"purple"}
         iconSize={20}
         iconInnerSize={10}
@@ -30,10 +30,10 @@ export default function Budget({ onChangeCallback }) {
         <div className="mt-4 text-base text-black font-semibold text-left">
           Medium
         </div>
-        <div className="text-sm text-gray-500 text-left">500 - 2500 USD</div>
+        <div className="text-sm text-gray-500 text-left">10000 - 25000 INR</div>
       </RadioButton>
       <RadioButton
-        value="2500+"
+        value="25000+"
         pointColor={"purple"}
         iconSize={20}
         iconInnerSize={10}
@@ -43,7 +43,7 @@ export default function Budget({ onChangeCallback }) {
         <div className="mt-4 text-base text-black font-semibold text-left">
           High
         </div>
-        <div className="text-sm text-gray-500 text-left">2500+ USD</div>
+        <div className="text-sm text-gray-500 text-left">25000+ INR</div>
       </RadioButton>
     </RadioGroup>
   );

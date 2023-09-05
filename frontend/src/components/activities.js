@@ -20,7 +20,7 @@ export default function Activities({ onChangeCallback }) {
   };
 
   useEffect(() => {
-    onChangeCallback({ activities });
+    onChangeCallback({ interests: activities });
   }, [activities]);
 
   return (

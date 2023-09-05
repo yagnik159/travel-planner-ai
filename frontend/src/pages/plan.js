@@ -13,12 +13,12 @@ export default function Plan() {
   const [formParams, setFormParams] = useState({
     destination: null,
     start_date: null,
-    days: null,
+    days: 1,
     budget: null,
     group_type: null,
     travelers: 1,
     interests: null,
-    cuisineTypes: null,
+    cuisine_types: null,
   });
 
   const [formParamsError, setFormParamsError] = useState({});
@@ -62,9 +62,19 @@ export default function Plan() {
     [setCityInput]
   );
 
+  const onSelectCity = (_city) => {
+    setSelectedCity(_city);
+    setCityInput(_city.name);
+    updateFormParams({
+      destination: _city.name,
+    });
+    setCityOptions([]);
+  };
+
   const updateFormParams = useCallback(
     (newVal) => {
       if (!newVal) return;
+
       const [key] = Object.entries(newVal)[0];
 
       setFormParams({ ...formParams, ...newVal });
@@ -75,18 +85,25 @@ export default function Plan() {
   );
 
   const onFormSubmit = useCallback(
-    (e) => {
+    async (e) => {
       e.preventDefault();
 
       let _formParamsError = {};
 
       Object.keys(formParams).forEach((key) => {
-        if (!formParams[key]) {
+        if (!formParams[key] || formParams[key]?.length === 0) {
           _formParamsError = Object.assign(_formParamsError, { [key]: true });
         }
       });
 
       setFormParamsError(_formParamsError);
+
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/suggest-trip`,
+        formParams
+      );
+
+      console.log({ res });
     },
     [setFormParams, setFormParamsError, formParams, formParamsError]
   );
@@ -121,14 +138,7 @@ export default function Plan() {
                           return (
                             <div
                               key={_city.id}
-                              onClick={() => {
-                                setSelectedCity(_city);
-                                setCityInput(_city.name);
-                                updateFormParams({
-                                  destination: _city.name,
-                                });
-                                setCityOptions([]);
-                              }}
+                              onClick={() => onSelectCity(_city)}
                             >
                               {_city.name}
                             </div>
@@ -172,7 +182,7 @@ export default function Plan() {
                     <Spinner onChangeCallback={updateFormParams} />
                   </div>
                   <div className="form-error">
-                    {formParamsError?.travelers
+                    {formParamsError?.days
                       ? "Please select atleast one of traveler*"
                       : null}
                   </div>
@@ -192,7 +202,7 @@ export default function Plan() {
                     <Budget onChangeCallback={updateFormParams} />
                     <div className="form-error">
                       {formParamsError?.budget
-                        ? "Please select a destination*"
+                        ? "Please select your budget*"
                         : null}
                     </div>
                   </div>
@@ -208,7 +218,7 @@ export default function Plan() {
                     <Category onChangeCallback={updateFormParams} />
                     <div className="form-error">
                       {formParamsError?.group_type
-                        ? "Please select a destination*"
+                        ? "Please select travel buddy.*"
                         : null}
                     </div>
                   </div>
@@ -224,7 +234,7 @@ export default function Plan() {
                     <Activities onChangeCallback={updateFormParams} />
                     <div className="form-error">
                       {formParamsError?.interests
-                        ? "Please select a destination*"
+                        ? "Please select your interested activity*"
                         : null}
                     </div>
                   </div>
@@ -240,7 +250,7 @@ export default function Plan() {
                     <SelectOptions onChangeCallback={updateFormParams} />
                     <div className="form-error">
                       {formParamsError?.cuisineTypes
-                        ? "Please select a destination*"
+                        ? "Please select whether you would like to have these options*"
                         : null}
                     </div>
                   </div>
