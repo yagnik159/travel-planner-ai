@@ -8,6 +8,7 @@ import Category from "@/components/category";
 import Activities from "@/components/activities";
 import SelectOptions from "@/components/options";
 import axios from "axios";
+import TripPlan from "@/components/tripPlan";
 
 export default function Plan() {
   const [formParams, setFormParams] = useState({
@@ -22,6 +23,10 @@ export default function Plan() {
   });
 
   const [formParamsError, setFormParamsError] = useState({});
+
+  const [tripPlanRes, setTripPlanRes] = useState(RESULT);
+
+  const [loader, setLoader] = useState(false);
 
   const [cityOptions, setCityOptions] = useState([]);
 
@@ -98,15 +103,38 @@ export default function Plan() {
 
       setFormParamsError(_formParamsError);
 
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/suggest-trip`,
-        formParams
-      );
-
-      console.log({ res });
+      try {
+        setLoader(true);
+        const res = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/suggest-trip`,
+          formParams
+        );
+        setLoader(false);
+        setTripPlanRes(res.data);
+      } catch (error) {
+        setLoader(false);
+      }
     },
     [setFormParams, setFormParamsError, formParams, formParamsError]
   );
+
+  if (loader) {
+    return (
+      <>
+        <Header />
+        <div className="text-center flex-1">loading...</div>
+      </>
+    );
+  }
+
+  if (tripPlanRes) {
+    return (
+      <>
+        <Header />
+        <TripPlan tripPlanRes={tripPlanRes} />
+      </>
+    );
+  }
 
   return (
     <>
@@ -268,7 +296,143 @@ export default function Plan() {
           </div>
         </div>
       </div>
-      ;
     </>
   );
 }
+
+const RESULT = {
+  days: [
+    {
+      title: "Day 1",
+      day: 1,
+      activities: [
+        {
+          local_time: "09:00",
+          location_name: "Chapora Fort",
+          budget_inr: 0,
+          duration_min: 120,
+          activity_types: ["outdoor"],
+          activity_description:
+            "Start your day by visiting Chapora Fort, known for its scenic views of the Arabian Sea. Take a leisurely walk around the fort and enjoy the panoramic view of the surroundings.",
+        },
+        {
+          local_time: "12:00",
+          location_name: "Anjuna Beach",
+          budget_inr: 500,
+          duration_min: 240,
+          activity_types: ["beach"],
+          activity_description:
+            "Head to Anjuna Beach for some relaxing time by the sea. Soak up the sun, take a dip in the crystal-clear waters, and indulge in water sports like jet skiing or parasailing.",
+        },
+        {
+          local_time: "16:00",
+          location_name: "Basilica of Bom Jesus",
+          budget_inr: 0,
+          duration_min: 90,
+          activity_types: ["sightseeing"],
+          activity_description:
+            "Visit the historic Basilica of Bom Jesus, a UNESCO World Heritage Site and one of the oldest churches in Goa. Admire its stunning architecture and learn about its historical significance.",
+        },
+        {
+          local_time: "19:00",
+          location_name: "Vegetarian Restaurant",
+          budget_inr: 1000,
+          duration_min: 90,
+          activity_types: ["food"],
+          activity_description:
+            "Enjoy a delicious vegetarian dinner at a local restaurant. Goa offers a wide range of vegetarian dining options, from traditional Goan cuisine to international dishes.",
+        },
+      ],
+      day_summary:
+        "Explore the scenic Chapora Fort, relax on Anjuna Beach, visit the historic Basilica of Bom Jesus, and savor a vegetarian dinner.",
+    },
+    {
+      title: "Day 2",
+      day: 2,
+      activities: [
+        {
+          local_time: "09:00",
+          location_name: "Dudhsagar Falls",
+          budget_inr: 1500,
+          duration_min: 360,
+          activity_types: ["outdoor"],
+          activity_description:
+            "Embark on an exciting trip to Dudhsagar Falls, one of the tallest waterfalls in India. Enjoy the scenic drive to the falls and marvel at the breathtaking beauty of the cascading water.",
+        },
+        {
+          local_time: "14:00",
+          location_name: "Palolem Beach",
+          budget_inr: 1000,
+          duration_min: 240,
+          activity_types: ["beach"],
+          activity_description:
+            "Head to Palolem Beach for a relaxing afternoon. This pristine beach offers a tranquil atmosphere, perfect for sunbathing, swimming, and enjoying beachside shacks serving delicious seafood.",
+        },
+        {
+          local_time: "18:00",
+          location_name: "Local Market",
+          budget_inr: 500,
+          duration_min: 120,
+          activity_types: ["shopping"],
+          activity_description:
+            "Explore the local market to buy souvenirs, handicrafts, spices, and traditional Goan products. Bargain for unique items and experience the vibrant local culture.",
+        },
+        {
+          local_time: "20:00",
+          location_name: "Vegetarian Restaurant",
+          budget_inr: 1000,
+          duration_min: 90,
+          activity_types: ["food"],
+          activity_description:
+            "Enjoy a delightful vegetarian dinner at a local restaurant. Try some authentic Goan dishes like Veg Xacuti or Mushroom Caldin, rich in flavors and spices.",
+        },
+      ],
+      day_summary:
+        "Visit Dudhsagar Falls, relax at Palolem Beach, explore the local market, and indulge in a vegetarian dinner.",
+    },
+    {
+      title: "Day 3",
+      day: 3,
+      activities: [
+        {
+          local_time: "09:00",
+          location_name: "Aguada Fort",
+          budget_inr: 0,
+          duration_min: 120,
+          activity_types: ["sightseeing"],
+          activity_description:
+            "Start your day by visiting Aguada Fort, a historic Portuguese fort with stunning views of the Arabian Sea. Explore the fort and its lighthouse, and learn about its colonial past.",
+        },
+        {
+          local_time: "12:00",
+          location_name: "Calangute Beach",
+          budget_inr: 500,
+          duration_min: 240,
+          activity_types: ["beach"],
+          activity_description:
+            "Head to Calangute Beach, known as the 'Queen of Beaches' in Goa. Relax on the golden sand, take a dip in the sea, and enjoy beach activities like banana boat rides or beach volleyball.",
+        },
+        {
+          local_time: "15:00",
+          location_name: "Spice Plantation",
+          budget_inr: 1000,
+          duration_min: 180,
+          activity_types: ["sightseeing", "food"],
+          activity_description:
+            "Visit a spice plantation and take a guided tour to learn about various spices grown in Goa. Experience the aroma and taste of freshly prepared Goan dishes made with these spices.",
+        },
+        {
+          local_time: "19:00",
+          location_name: "Vegetarian Restaurant",
+          budget_inr: 1000,
+          duration_min: 90,
+          activity_types: ["food"],
+          activity_description:
+            "End your trip with a savory vegetarian dinner at a local restaurant. Enjoy the flavors of Goan cuisine and bid farewell to this beautiful coastal destination.",
+        },
+      ],
+      day_summary:
+        "Discover Aguada Fort, unwind at Calangute Beach, explore a spice plantation, and relish a vegetarian dinner.",
+    },
+  ],
+};
