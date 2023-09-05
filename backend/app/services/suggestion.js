@@ -11,7 +11,6 @@ class Suggestion {
     this.days = req.body.days;
     this.budget = req.body.budget;
     this.groupType = req.body.group_type;
-    this.travelers = req.body.travelers;
     this.interests = req.body.interests;
     this.cuisineTypes = req.body.cuisine_types;
   }
@@ -63,10 +62,6 @@ class Suggestion {
 
     if (!oThis.groupType) {
       param_errors.push("missing_group_type");
-    }
-
-    if (!oThis.travelers) {
-      param_errors.push("missing_travelers");
     }
 
     if (!oThis.interests) {
