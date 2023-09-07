@@ -4,11 +4,11 @@ import axios from "axios";
 
 function HotelRecommendations(props) {
   const {
-    destination = "goa, india",
-    start_date = "20-10-2023",
-    days = 3,
-    group_type = "solo",
-  } = props;
+    destination = "",
+    start_date = "",
+    days = 1,
+    group_type = "",
+  } = props.data || {};
 
   const [hotelRecommendations, setHotelRecommendations] = useState(null);
 
@@ -78,10 +78,13 @@ function HotelRecommendations(props) {
   }
 
   return (
-    <>
-      <div>HotelRecommendations</div>
+    <div className="flex flex-col">
+      <hr className="my-7"></hr>
+      <div className="font-bold text-[1.5rem] text-[#1f2937] mb-[20px]">
+        Hotel Recommendations
+      </div>
       <div>No hotels found.</div>
-    </>
+    </div>
   );
 }
 

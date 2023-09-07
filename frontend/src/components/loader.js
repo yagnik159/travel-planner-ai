@@ -4,9 +4,7 @@ export default function Loader({
   loaderText = "Please wait while we plan your trip...",
 }) {
   return (
-    <div
-      className={`flex flex-col items-center justify-center gap-3 mt-[80px] `}
-    >
+    <div className={`flex flex-col items-center gap-3 mt-[80px] `}>
       <svg
         width="24"
         height="24"

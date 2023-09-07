@@ -27,7 +27,6 @@ function CityDetailsCrad({ destination = "" }) {
 
   if (loading) return <Loader loaderText="" />;
 
-  // console.log({ cityDetails });
   return (
     <div>
       <div className="text-2xl sm:text-4xl font-semibold mb-[20px] text-[#1f2937]">
