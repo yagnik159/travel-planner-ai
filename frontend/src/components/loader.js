@@ -1,6 +1,8 @@
 import React from "react";
 
-export default function Loader() {
+export default function Loader({
+  loaderText = "Please wait while we plan your trip...",
+}) {
   return (
     <div
       className={`flex flex-col items-center justify-center gap-3 mt-[80px] `}
@@ -92,7 +94,7 @@ export default function Loader() {
           </clipPath>
         </defs>
       </svg>
-      <div className="loaderText">Please wait while we plan your trip...</div>
+      <div className="loaderText">{loaderText}</div>
     </div>
   );
 }

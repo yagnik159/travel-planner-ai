@@ -10,6 +10,7 @@ import SelectOptions from "@/components/options";
 import axios from "axios";
 import TripPlan from "@/components/tripPlan";
 import Loader from "@/components/loader";
+import HotelRecommendations from "@/components/hotelRecommendations";
 
 export default function Plan() {
   const [formParams, setFormParams] = useState({
@@ -132,7 +133,8 @@ export default function Plan() {
     return (
       <>
         <Header />
-        <TripPlan tripPlanRes={tripPlanRes} />
+        {/* <TripPlan tripPlanRes={tripPlanRes} /> */}
+        <HotelRecommendations data={formParams} />
       </>
     );
   }

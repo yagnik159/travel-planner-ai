@@ -7,16 +7,24 @@ function TripPlan({ tripPlanRes }) {
     <div className="flex-1 container w-full mx-auto sm:flex sm:items-center sm:justify-between px-[1.5rem] flex-col">
       <Accordion
         transition
-        transitionTimeout={300}
+        transitionTimeout={500}
         className="flex flex-col gap-[30px] w-[800px]"
       >
         {tripPlanRes.days.map((day, i) => (
-          <AccordionItem header={day.title} key={i}>
+          <AccordionItem
+            key={i}
+            header={
+              <div className="text-left">
+                <p className="font-bold text-[1.5rem]">{day.title}</p>
+                <p className="mb-4 text-sm">{day.day_summary}</p>
+              </div>
+            }
+          >
             <div className="flex flex-col" key={i}>
               {/* <h1 className="font-bold text-[1.5rem]">{day.title}</h1> */}
-              <div className="mb-4 font-base text-sm md:text-base">
+              {/* <div className="mb-4 font-base text-sm md:text-base">
                 {day.day_summary}
-              </div>
+              </div> */}
 
               <div>
                 {day.activities.map((activity, i) => (
