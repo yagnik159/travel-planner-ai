@@ -3,9 +3,9 @@ import React from "react";
 
 export default function Header() {
   return (
-    <header className="relative flex flex-wrap sm:justify-start sm:flex-nowrap z-60 text-sm py-[30px] w-full bg-white shadow-sm mb-[-1px]">
+    <header className="relative flex flex-wrap sm:justify-start sm:flex-nowrap z-60 text-sm py-[33px] w-full mb-[-1px]">
       <nav className="container w-full mx-auto sm:flex sm:items-center sm:justify-between px-[1.5rem]">
-        <Link href="/" className={`font-bold text-[30px] text-[#27272a]`}>
+        <Link href="/" className={`font-bold text-[34px] text-[#27272a]`}>
           {/* <span className="text-[#ec4899]">T</span>
           <span className="text-[#ec4899]">T</span>
           <span className="text-[#ec4899]">r</span>
