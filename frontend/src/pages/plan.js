@@ -108,6 +108,8 @@ export default function Plan() {
 
       setFormParamsError(_formParamsError);
 
+      if (Object.keys(_formParamsError).length > 0) return;
+
       try {
         setFormFilled(true);
         setLoader(true);
