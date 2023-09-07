@@ -46,7 +46,7 @@ function HotelRecommendations(props) {
               id = "",
               name = "",
               url = "",
-              image_ur = "",
+              image_url = "",
               address = "",
               price = "",
             } = hotelMapById[hotelId] || {};
@@ -57,7 +57,7 @@ function HotelRecommendations(props) {
                 <div>Address: {address}</div>
                 <div>Costs: Approximately {price}</div>
                 <div>
-                  <img src={image_ur} alt={name} />
+                  <img src={image_url} alt={name} />
                 </div>
               </div>
             );

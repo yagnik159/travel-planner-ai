@@ -11,6 +11,7 @@ import axios from "axios";
 import TripPlan from "@/components/tripPlan";
 import Loader from "@/components/loader";
 import HotelRecommendations from "@/components/hotelRecommendations";
+import CityDetailsCrad from "@/components/cityDetailsCrad";
 
 export default function Plan() {
   const [formParams, setFormParams] = useState({
@@ -133,6 +134,7 @@ export default function Plan() {
     return (
       <>
         <Header />
+        {/* <CityDetailsCrad destination={"Goa, India"} /> */}
         {/* <TripPlan tripPlanRes={tripPlanRes} /> */}
         <HotelRecommendations data={formParams} />
       </>
