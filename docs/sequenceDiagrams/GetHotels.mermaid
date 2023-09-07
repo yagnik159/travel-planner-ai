@@ -1,0 +1,36 @@
+sequenceDiagram
+  title Get nearby hotels
+    participant Client
+    participant API
+    participant GetHotels
+    participant ErrorResponse
+    participant HttpClient
+
+    Client->>API: Send request 
+    note right of Client:  Request: <br>GET {api_base_url}/api/hotels<br><br>query params:  <br>location [mandatory]<br>start_date [mandatory]<br>days [mandatory]<br>group_type [mandatory]
+    API ->> GetHotels: Create instance with req and res <br>and Call perform method of GetHotels service
+    note over GetHotels: Initialize properties
+    note over GetHotels: Call validateParameters 
+    
+    break if Invalid Parameters
+        GetHotels ->> ErrorResponse: Create ErrorResponse object
+        ErrorResponse -->> GetHotels: Perform error handling
+        GetHotels -->> Client: Return 404 error response
+    end
+
+    note over GetHotels: Call makeRequest Method
+    GetHotels ->> HttpClient: Make Http request to Airbnb API
+    HttpClient-->> GetHotels: Airbnb Response
+
+    alt HttpClient Error
+        GetHotels ->> ErrorResponse: Create ErrorResponse object
+        ErrorResponse -->> GetHotels: Perform error handling
+        GetHotels -->> Client: Return 500 / 401 error response
+    else Success
+        note over GetHotels: Extract response body
+    end
+
+    Note over GetHotels: Format response
+    GetHotels -->> Client: Return formatted response
+
+    API -->> Client: Success:200<br>Response: {<br>  "hotel_id": [] ,<br>  "hotel_map_by_id": {}<br>}
