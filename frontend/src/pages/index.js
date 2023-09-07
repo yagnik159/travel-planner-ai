@@ -36,7 +36,7 @@ export default function Home() {
           </p>
           <Link
             href="/plan"
-            className={`bg-[#000] text-[#fff] border-2 text-[18px] font-medium px-[2rem] py-[1rem] inline-block hover:bg-transparent transition tracking-wider ${styles.heroCta}`}
+            className={`bg-[#000] text-[#fff] border-2 text-[18px] font-medium px-[2rem] py-[1rem] inline-block hover:bg-transparent transition tracking-wider heroCta`}
           >
             Plan Now to Travel
           </Link>
