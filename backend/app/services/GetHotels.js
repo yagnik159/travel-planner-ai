@@ -119,7 +119,7 @@ class GetHotels {
                     id: data[i].id,
                     name: data[i].name,
                     url: data[i].url,
-                    image_ur: data[i]?.images[0],
+                    image_url: data[i]?.images[0],
                     address: data[i].address,
                     price: data[i].price.rate + " " + data[i].price.currency,
                 };
