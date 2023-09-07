@@ -1,0 +1,34 @@
+sequenceDiagram
+  title Get Suggestions
+    participant Client
+    participant API
+    participant GetCityDetails
+    participant ErrorResponse
+    participant OpenAI
+
+    Client->>API: Send request 
+    note right of Client:  Request: <br>POST {api_base_url}/api/suggest-trip<br><br>body params:  <br>destination [mandatory]<br>start_date [mandatory]<br>days [mandatory]<br>budget [mandatory]<br>group_type [mandatory]<br>interests [mandatory]<br>cuisine_types [mandatory]
+    API ->> GetCityDetails: Create instance with req and res <br>and Call perform method of GetCityDetails service
+    note over GetCityDetails: Initialize properties
+    note over GetCityDetails: Call validateParameters Method
+
+    break if Invalid Parameters
+        GetCityDetails ->> ErrorResponse: Create ErrorResponse object
+        ErrorResponse -->> GetCityDetails: Perform error handling
+        GetCityDetails -->> Client: Return 404 error response
+    end
+
+    note over GetCityDetails: Call makeRequest Method
+    GetCityDetails ->> OpenAI: Make OpenAI request for city 
+    OpenAI-->> GetCityDetails: OpenAI Response
+
+    break OpenAI Error
+        GetCityDetails ->> ErrorResponse: Create ErrorResponse object
+        ErrorResponse -->> GetCityDetails: Perform error handling
+        GetCityDetails -->> Client: Return 500 / 401 error response
+    end
+
+    Note over GetCityDetails: Format response
+    GetCityDetails -->> API: Return formatted response
+
+    API -->> Client: Success:200<br>Response: {<br>  "days": []<br>}

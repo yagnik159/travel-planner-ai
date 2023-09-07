@@ -1,0 +1,43 @@
+sequenceDiagram
+  title Get City Details
+    participant Client
+    participant API
+    participant GetCityDetails
+    participant ErrorResponse
+    participant HttpClient
+    participant OpenAI
+
+    Client->>API: Send request 
+    note right of Client:  Request: <br>GET {api_base_url}/api/city-details<br><br>query params:  <br>destination [mandatory]
+    API ->> GetCityDetails: Create instance with req and res <br>and Call perform method of GetCityDetails service
+    note over GetCityDetails: Initialize properties
+    note over GetCityDetails: Call validateParameters Method
+
+    break if Invalid Parameters
+        GetCityDetails ->> ErrorResponse: Create ErrorResponse object
+        ErrorResponse -->> GetCityDetails: Perform error handling
+        GetCityDetails -->> Client: Return 404 error response
+    end
+
+    note over GetCityDetails: Call makeRequest Method
+    GetCityDetails ->> OpenAI: Make OpenAI request for city 
+    GetCityDetails ->> HttpClient: Make Http request to for city image to unsplash
+    OpenAI-->> GetCityDetails: OpenAI Response
+    HttpClient-->> GetCityDetails: Unsplash Response
+
+    alt OpenAI Error
+        GetCityDetails ->> ErrorResponse: Create ErrorResponse object
+        ErrorResponse -->> GetCityDetails: Perform error handling
+        GetCityDetails -->> Client: Return 500 / 401 error response
+    else Unsplash Error
+        GetCityDetails ->> ErrorResponse: Create ErrorResponse object
+        ErrorResponse -->> GetCityDetails: Perform error handling
+        GetCityDetails -->> Client: Return 500 / 401 error response
+    else Success
+        note over GetCityDetails: Extract description and image URL
+    end
+
+    Note over GetCityDetails: Format response
+    GetCityDetails -->> API: Return formatted response
+
+    API -->> Client: Success:200<br>Response: <br>{<br>  "description": "description",<br>  "image": "image url"<br>}

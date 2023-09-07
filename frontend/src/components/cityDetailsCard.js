@@ -25,7 +25,7 @@ function CityDetailsCrad({ destination = "" }) {
     getCityDetails(destination);
   }, [destination]);
 
-  if (loading) return <Loader loaderText="" />;
+  if (loading) return <Loader loaderText="Fetching detstination details..." />;
 
   return (
     <div>

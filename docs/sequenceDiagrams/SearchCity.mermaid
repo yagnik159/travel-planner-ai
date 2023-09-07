@@ -1,0 +1,44 @@
+sequenceDiagram
+    title Search city
+    participant Client
+    participant API
+    participant SearchCity
+    participant MakeAmadeusRequest
+    participant ErrorResponse
+    participant FetchAccessToken
+
+    Client->>API: Send request 
+    note right of Client:  Request: <br>GET {api_base_url}/api/search-city<br><br>query params:  <br>q [mandatory]
+    note over SearchCity: Initialize properties
+    note over SearchCity: Call validateParameters 
+    
+    break if Invalid Parameters
+        SearchCity ->> ErrorResponse: Create ErrorResponse object
+        ErrorResponse -->> SearchCity: Perform error handling
+        SearchCity -->> Client: Return 404 error response
+    end
+
+    note over SearchCity: Call makeRequest Method
+
+    SearchCity ->> MakeAmadeusRequest: Make request to Amadeus
+    alt Response code 401
+        note over MakeAmadeusRequest: Fetch Access new token and make requese
+        MakeAmadeusRequest ->> FetchAccessToken: Make request to amadeus to fecth access token
+        FetchAccessToken-->>MakeAmadeusRequest: Return New access token
+        note over MakeAmadeusRequest: make request to amadeus
+    end
+    MakeAmadeusRequest-->> SearchCity: Airbnb Response
+
+
+    alt MakeAmadeusRequest Error
+        SearchCity ->> ErrorResponse: Create ErrorResponse object
+        ErrorResponse -->> SearchCity: Perform error handling
+        SearchCity -->> Client: Return 500 / 401 error response
+    else Success
+        note over SearchCity: Extract response body
+    end
+
+    note over SearchCity: Format response
+    SearchCity -->> API: Return formatted response
+
+    API -->> Client: Success:200<br>Response: {<br>  "city_id": [] ,<br>  "city_map_by_id": {}<br>}
