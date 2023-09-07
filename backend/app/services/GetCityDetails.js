@@ -60,7 +60,7 @@ class GetCityDetails {
       return;
     }
 
-    // oThis.description = responses[0].choices[0].message.content;
+    oThis.description = responses[0].choices[0].message.content;
 
     const response = JSON.parse(responses[1].body);
 
@@ -71,44 +71,43 @@ class GetCityDetails {
     const oThis = this;
     oThis.res = {
       imageUrl: oThis.imageUrl,
+      description: oThis.description,
     };
   }
 
   async _makeOpenAiRequest() {
     const oThis = this;
 
-    // const api_key = new OpenAI(process.env.OPENAI_API_KEY);
+    const api_key = new OpenAI(process.env.OPENAI_API_KEY);
 
-    // const prompt = `Please provide a brief description of ${oThis.city}. Highlight its historical significance, notable landmarks, and any unique cultural aspects that define this city in 4 or 5 sentences.`;
+    const prompt = `Please provide a concise overview of ${oThis.city}, emphasizing its historical importance, prominent landmarks, and distinctive cultural attributes, using no more than 2-3 brief sentences.`;
 
-    // const prompt_json = {
-    //   instruction: prompt,
-    //   output_format: "json",
-    //   structure: {
-    //     description: "String",
-    //   },
-    // };
+    const prompt_json = {
+      instruction: prompt,
+      output_format: "json",
+      structure: {
+        description: "String",
+      },
+    };
 
-    // const openAi = new OpenAI(api_key);
+    const openAi = new OpenAI(api_key);
 
-    // const completion = openAi.chat.completions
-    //   .create({
-    //     messages: [{ role: "user", content: JSON.stringify(prompt_json) }],
-    //     model: "gpt-3.5-turbo",
-    //   })
-    //   .catch((err) => {
-    //     const errorObject = new ErrorResponse(
-    //       "openai_error",
-    //       err.message,
-    //       "a_s_s_s_2",
-    //       null
-    //     );
+    const completion = openAi.chat.completions
+      .create({
+        messages: [{ role: "user", content: JSON.stringify(prompt_json) }],
+        model: "gpt-3.5-turbo",
+      })
+      .catch((err) => {
+        const errorObject = new ErrorResponse(
+          "openai_error",
+          err.message,
+          "a_s_s_s_2",
+          null
+        );
 
-    //     oThis.res = errorObject.perform();
-    //     return;
-    //   });
-    const completion = {};
-
+        oThis.res = errorObject.perform();
+        return;
+      });
     return completion;
   }
 
