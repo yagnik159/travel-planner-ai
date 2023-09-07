@@ -104,7 +104,7 @@ class Suggestion {
       tripDuration: oThis.days,
     };
 
-    const prompt = `You are an AI assistant which gives suggestion on tour planning according to this prompt. Generate a personalized travel itinerary for a trip to ${values.destination} with a budget of ${values.budget} INR rupees. The traveler is interested in a ${values.travelStyle} vacation. The itinerary should include ${values.activityType} activities and ${values.cuisineType} dining options. Please provide a detailed itinerary with daily recommendations for ${values.tripDuration} days, including suggested destinations, activities, and dining options`;
+    const prompt = `Create a personalized travel itinerary for a trip to ${values.destination} with a budget of ${values.budget} INR rupees. The traveler prefers a ${values.travelStyle} vacation and is interested in ${values.activityType} activities and ${values.cuisineType} dining options. Please provide a detailed itinerary spanning ${values.tripDuration} days, with daily recommendations for destinations, activities, and dining options. Ensure that the total cost of activities does not exceed the provided budget, and utilize approximately 80% of the budget`;
     console.log("***OpenAI prompt:", prompt);
     oThis.prompt = prompt;
   }

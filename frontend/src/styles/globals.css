@@ -166,7 +166,7 @@ input:checked + .fullContainer::before {
   border: 2px solid purple;
 }
 
-.form-error{
+.form-error {
   color: red;
   font-size: 14px;
   margin-top: 5px;
@@ -175,7 +175,7 @@ input:checked + .fullContainer::before {
   height: 18px;
 }
 
-.cityInput{
+.cityInput {
   width: 100%;
   margin-right: 0 !important;
   border: 1px solid #e5e7eb;
@@ -184,29 +184,39 @@ input:checked + .fullContainer::before {
   font-size: 18px;
 }
 
-.citySearchModal{
+.citySearchModal {
   position: absolute;
-    z-index: 1;
-    background: white;
-    width: 100%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    top: 50px;
-    text-align: left;
-    padding-left: 10px;
+  z-index: 1;
+  background: white;
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  top: 50px;
+  text-align: left;
+  padding-left: 10px;
 }
 
-.citySearchModal > div{
+.citySearchModal > div {
   padding: 10px 0;
   border-bottom: 1px solid #e5e7eb;
   cursor: pointer;
 }
 
-.relative{
+.relative {
   position: relative;
 }
 
-.loaderText{
+.loaderText {
   font-size: 20px;
   font-weight: bold;
   letter-spacing: 1.2px;
+}
+
+.szh-accordion__item-heading {
+  font-weight: bold;
+  font-size: 1.5rem;
+  border-bottom: 1px solid #333;
+}
+
+.szh-accordion__item-content {
+  transition: height 0.25s cubic-bezier(0, 0, 0, 1);
 }
