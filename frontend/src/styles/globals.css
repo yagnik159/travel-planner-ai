@@ -228,3 +228,11 @@ input:checked + .fullContainer::before {
 .szh-accordion__item-heading {
   border-bottom: 1px solid #e5e7eb;
 }
+
+.heroCta {
+  background: linear-gradient(90deg, #d33751 0%, #d13761 49.11%, #c62c66 100%);
+}
+
+.heroCta:hover {
+  background: linear-gradient(180deg, #c62c66 0%, #d13761 49.11%, #d33751 100%);
+}
