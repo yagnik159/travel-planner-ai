@@ -29,7 +29,7 @@ function CityDetailsCrad({ destination = "" }) {
 
   return (
     <div>
-      <div className="text-2xl sm:text-4xl font-semibold mb-[20px] text-[#1f2937]">
+      <div className="text-2xl sm:text-4xl font-bold mb-[20px] text-[#1f2937]">
         {destination}
       </div>
       <img
