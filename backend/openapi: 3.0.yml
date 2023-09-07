@@ -1,0 +1,422 @@
+openapi: 3.0.3
+info:
+  title: travel planner AI API's
+  description: Following api's will be called from the tripIn web app
+  version: '1.0'
+servers:
+  - url: http://localhost:3000
+components:
+  schemas:
+    response_400:
+      type: object
+      properties:
+        status_code:
+          type: string
+          example: 400
+        message: 
+          type: string
+          example: "At least one parameter is invalid or missing."
+        code:
+          type: string
+          example: "INVALID_PARAMS"
+        error_identifier:
+          type: string
+          example: "b_2"
+        params:
+          type: array
+          items:
+            type: string
+            example: "invalid_date"
+  
+    response_401:
+      type: object
+      properties:
+        status_code:
+          type: string
+          example: 401
+        message: 
+          type: string
+          example: "Unauthorized API request. Please check your API key."
+        code:
+          type: string
+          example: "UNAUTHORIZED"
+        error_identifier:
+          type: string
+          example: "a_b_c_1"
+        params:
+          type: array
+          items:
+            type: string
+          example: []
+           
+    response_404:
+      type: object
+      properties:
+        status_code:
+          type: string
+          example: 404
+        message: 
+          type: string
+          example: "Resource not found. Please check if the resource identifier passed in the URL is valid and try again."
+        code:
+          type: string
+          example: "NOT_FOUND"
+        error_identifier:
+          type: string
+          example: "a_b_c_1"
+        params:
+          type: array
+          items:
+            type: string
+          example: []
+           
+    response_500:
+      type: object
+      properties:
+        status_code:
+          type: string
+          example: 500
+        message: 
+          type: string
+          example: "Something went wrong."
+        code:
+          type: string
+          example: "INTERNAL_SERVER_ERROR"
+        error_identifier:
+          type: string
+          example: "a_b_c_1"
+        params:
+          type: array
+          items:
+            type: string
+          example: []
+paths:
+  /api/suggest-trip:
+    post:
+      description: Suggests a trip based on the user's preferences
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                destination:
+                  type: string
+                  example: 'Goa, India'
+                start_date:
+                  type: string
+                  example: '29-09-2023'
+                  format: dd-mm-yyyy
+                days:
+                  type: integer
+                  example: 5
+                budget:
+                  type: integer
+                  example: 50000
+                group_type: 
+                  type: string
+                  example: 'Family'
+                interests:
+                  type: array
+                  items:
+                    type: string
+                    example: 'Beach'
+                cuisine_types:
+                  type: array
+                  items:
+                    type: string
+                    example: 'vegetarian'
+              required:
+                - destination
+                - start_date
+                - days
+                - budget
+                - group_type
+                - interests
+                - cuisine_types
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  days:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                          example: 'Day 1'
+                        day:
+                          type: integer
+                          example: 1
+                        activities:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              local_time:
+                                type: string
+                                example: '10:00'
+                              location_name:
+                                type: string
+                                example: 'Baga Beach'
+                              budget_inr:
+                                type: integer
+                                example: 1000
+                              duration_min:
+                                type: integer
+                                example: 120
+                              activity_types:
+                                type: array
+                                items:
+                                  type: string
+                                  example: 'Beach'
+                              activity_description:
+                                type: string
+                                example: 'Enjoy the beach'
+        '400':
+            description: "Bad Request"
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/response_400'
+        '401':
+          description: Unauthorized access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_401'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_404'
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_500'
+
+  /api/search-city:
+    get:  
+      description: Search a city by query location_name
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: The location_name of the city to search
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  city_id:
+                    type: array
+                    items:
+                      type: string
+                      example: "iuyw89u9h"
+                  city_map_by_id:
+                    type: object
+                    properties:
+                      iuyw89u9h:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            example: "iuyw89u9h"
+                          iatacode:
+                            type: string
+                            example: "GOI"
+                          name:
+                            type: string
+                            example: "Goa"
+                          geocode:
+                            type: object
+                            properties:
+                              latitude:
+                                type: number
+                                example: 15.2993
+                              longitude:
+                                type: number
+                                example: 74.124
+        '400':
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_400'
+        '401':
+          description: Unauthorized access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_401'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_404'
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_500'
+
+  /api/hotels:
+    get:
+      description: Get hotels for a city
+      parameters:
+        - in: query
+          name: location
+          schema:
+            type: string
+          required: true
+          example: "Goa"
+          description: The location name of the city to search
+        - in: query
+          name: start_date
+          schema:
+            type: string
+          required: true
+          example: "29-09-2023"
+          description: The start date of the trip
+        - in: query
+          name: days
+          schema:
+            type: integer
+          required: true
+          example: 5
+          description: The number of days of the trip
+        - in: query
+          name: group_type
+          schema:
+            type: string
+          required: true
+          example: "Family"
+          description: The type of group
+
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  hotel_id:
+                    type: array
+                    items:
+                      type: string
+                      example: "iuyw89u9h"
+                  hotel_map_by_id:
+                    type: object
+                    properties:  
+                      iuyw89u9h:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            example: "iuyw89u9h"
+                          name:
+                            type: string
+                            example: "Hotel ABC"
+                          url:
+                            type: string
+                            example: "https://www.google.com"
+                          image_url:
+                            type: string
+                            example: "https://www.google.com"
+                          address:
+                            type: string
+                            example: "Hotel ABC, Goa"
+                          price:
+                            type: string
+                            example: "1000 INR"
+        '400':
+            description: "Bad Request"
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/response_400'
+        '401':
+          description: Unauthorized access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_401'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_404'
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_500'                  
+
+  /api/city-details:
+    get:
+      parameters:
+        - in: query
+          name: destination
+          schema:
+            type: string
+          required: true
+          example: "Goa"
+          description: The location name of the city to search
+      
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  imageUrl:
+                    type: string
+                    example: "https://www.google.com"
+                  description:
+                    type: string
+                    example: "Goa is a state on the southwestern coast of India within the region known as the Konkan, and geographically separated from the Deccan highlands by the Western Ghats."
+        '400':
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_400'
+        '401':
+          description: Unauthorized access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_401'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_404'
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_500'
