@@ -20,9 +20,11 @@ app.use(cors(corsOptions));
 // Define your routes and other application logic here
 
 app.post("/api/suggest-trip", function (request, response, next) {
+  console.log("*** Suggest trip API called:");
   const res = perform(request, response, "/app/services/Suggestion");
 
   Promise.resolve(res).then((res) => {
+    console.log("*** Suggest trip API response:", res);
     if (res.status_code) {
       const statusCode = parseInt(res.status_code);
       response.status(statusCode).send(res);
@@ -33,9 +35,11 @@ app.post("/api/suggest-trip", function (request, response, next) {
 });
 
 app.get("/api/search-city", function (request, response, next) {
+  console.log("*** Search city API called:");
   const res = perform(request, response, "/app/services/SearchCity");
 
   Promise.resolve(res).then((res) => {
+    console.log("*** Search city API response:", res);
     if (res.status_code) {
       const statusCode = parseInt(res.status_code);
       response.status(statusCode).send(res);
@@ -46,9 +50,11 @@ app.get("/api/search-city", function (request, response, next) {
 });
 
 app.get("/api/poi", function (request, response, next) {
+  console.log("*** POI API called:");
   const res = perform(request, response, "/app/services/GetPoi");
 
   Promise.resolve(res).then((res) => {
+    console.log("*** POI API response:", res);
     if (res.status_code) {
       const statusCode = parseInt(res.status_code);
       response.status(statusCode).send(res);
@@ -59,9 +65,11 @@ app.get("/api/poi", function (request, response, next) {
 });
 
 app.get("/api/hotels", function (request, response, next) {
+  console.log("*** Hotels API called:");
   const res = perform(request, response, "/app/services/GetHotels");
 
   Promise.resolve(res).then((res) => {
+    console.log("*** Hotels API response:", res);
     if(res.status_code) {
       const statusCode = parseInt(res.status_code);
       response.status(statusCode).send(res);
@@ -73,9 +81,11 @@ app.get("/api/hotels", function (request, response, next) {
 });
 
 app.get("/api/city-details", function (request, response, next) {
+  console.log("*** City Details API called:");
   const res = perform(request, response, "/app/services/GetCityDetails");
 
   Promise.resolve(res).then((res) => {
+    console.log("*** City Details API response:", res);
     if(res.status_code) {
       const statusCode = parseInt(res.status_code);
       response.status(statusCode).send(res);
