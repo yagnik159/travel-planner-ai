@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "b554217f-e3fc-4fe6-9371-e44a78511dd4",
+		"name": "Tripp-In",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18571244"
+	},
+	"item": [
+		{
+			"name": "Suggest a trip",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"destination\": \"Goa\",\n    \"start_date\": \"29-09-2023\",\n    \"days\": 1,\n    \"budget\": 150,\n    \"group_type\": \"family\",\n    \"interests\": [\n        \"sight seeing\",\n        \"beach\"\n    ],\n    \"cuisine_types\": [\n        \"vegetarian\",\n        \"vegan\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/suggest-trip",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"suggest-trip"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get city details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/city-details?destination=Goa, india",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"city-details"
+					],
+					"query": [
+						{
+							"key": "destination",
+							"value": "Goa, india"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search City",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/search-city?q=cal",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"search-city"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "cal"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Near by hotel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/hotels?location=goa, india&start_date=20-10-2023&days=3&group_type=solo",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"hotels"
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "goa, india"
+						},
+						{
+							"key": "start_date",
+							"value": "20-10-2023"
+						},
+						{
+							"key": "days",
+							"value": "3"
+						},
+						{
+							"key": "group_type",
+							"value": "solo"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
