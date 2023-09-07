@@ -1,8 +1,8 @@
 openapi: 3.0.3
 info:
-  title: travel planner AI API's
+  title: TrippIn AI API's
   description: Following api's will be called from the tripIn web app
-  version: '1.0'
+  version: "1.0"
 servers:
   - url: http://localhost:${A_PORT}
 components:
@@ -13,7 +13,7 @@ components:
         status_code:
           type: string
           example: 400
-        message: 
+        message:
           type: string
           example: "At least one parameter is invalid or missing."
         code:
@@ -27,14 +27,14 @@ components:
           items:
             type: string
             example: "invalid_date"
-  
+
     response_401:
       type: object
       properties:
         status_code:
           type: string
           example: 401
-        message: 
+        message:
           type: string
           example: "Unauthorized API request. Please check your API key."
         code:
@@ -48,14 +48,14 @@ components:
           items:
             type: string
           example: []
-           
+
     response_404:
       type: object
       properties:
         status_code:
           type: string
           example: 404
-        message: 
+        message:
           type: string
           example: "Resource not found. Please check if the resource identifier passed in the URL is valid and try again."
         code:
@@ -69,14 +69,14 @@ components:
           items:
             type: string
           example: []
-           
+
     response_500:
       type: object
       properties:
         status_code:
           type: string
           example: 500
-        message: 
+        message:
           type: string
           example: "Something went wrong."
         code:
@@ -103,10 +103,10 @@ paths:
               properties:
                 destination:
                   type: string
-                  example: 'Goa, India'
+                  example: "Goa, India"
                 start_date:
                   type: string
-                  example: '29-09-2023'
+                  example: "29-09-2023"
                   format: dd-mm-yyyy
                 days:
                   type: integer
@@ -114,19 +114,19 @@ paths:
                 budget:
                   type: integer
                   example: 50000
-                group_type: 
+                group_type:
                   type: string
-                  example: 'Family'
+                  example: "Family"
                 interests:
                   type: array
                   items:
                     type: string
-                    example: 'Beach'
+                    example: "Beach"
                 cuisine_types:
                   type: array
                   items:
                     type: string
-                    example: 'vegetarian'
+                    example: "vegetarian"
               required:
                 - destination
                 - start_date
@@ -136,7 +136,7 @@ paths:
                 - interests
                 - cuisine_types
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
@@ -150,7 +150,7 @@ paths:
                       properties:
                         title:
                           type: string
-                          example: 'Day 1'
+                          example: "Day 1"
                         day:
                           type: integer
                           example: 1
@@ -161,10 +161,10 @@ paths:
                             properties:
                               local_time:
                                 type: string
-                                example: '10:00'
+                                example: "10:00"
                               location_name:
                                 type: string
-                                example: 'Baga Beach'
+                                example: "Baga Beach"
                               budget_inr:
                                 type: integer
                                 example: 1000
@@ -175,37 +175,37 @@ paths:
                                 type: array
                                 items:
                                   type: string
-                                  example: 'Beach'
+                                  example: "Beach"
                               activity_description:
                                 type: string
-                                example: 'Enjoy the beach'
-        '400':
-            description: "Bad Request"
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/response_400'
-        '401':
+                                example: "Enjoy the beach"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_400"
+        "401":
           description: Unauthorized access
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response_401'
-        '404':
+                $ref: "#/components/schemas/response_401"
+        "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response_404'
-        '500':
+                $ref: "#/components/schemas/response_404"
+        "500":
           description: Something went wrong
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response_500'
+                $ref: "#/components/schemas/response_500"
 
   /api/search-city:
-    get:  
+    get:
       description: Search a city by query location_name
       parameters:
         - in: query
@@ -215,7 +215,7 @@ paths:
           required: true
           description: The location_name of the city to search
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
@@ -251,30 +251,30 @@ paths:
                               longitude:
                                 type: number
                                 example: 74.124
-        '400':
+        "400":
           description: "Bad Request"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response_400'
-        '401':
+                $ref: "#/components/schemas/response_400"
+        "401":
           description: Unauthorized access
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response_401'
-        '404':
+                $ref: "#/components/schemas/response_401"
+        "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response_404'
-        '500':
+                $ref: "#/components/schemas/response_404"
+        "500":
           description: Something went wrong
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response_500'
+                $ref: "#/components/schemas/response_500"
 
   /api/hotels:
     get:
@@ -310,7 +310,7 @@ paths:
           description: The type of group
 
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
@@ -324,7 +324,7 @@ paths:
                       example: "iuyw89u9h"
                   hotel_map_by_id:
                     type: object
-                    properties:  
+                    properties:
                       iuyw89u9h:
                         type: object
                         properties:
@@ -346,30 +346,30 @@ paths:
                           price:
                             type: string
                             example: "1000 INR"
-        '400':
-            description: "Bad Request"
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/response_400'
-        '401':
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/response_400"
+        "401":
           description: Unauthorized access
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response_401'
-        '404':
+                $ref: "#/components/schemas/response_401"
+        "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response_404'
-        '500':
+                $ref: "#/components/schemas/response_404"
+        "500":
           description: Something went wrong
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response_500'                  
+                $ref: "#/components/schemas/response_500"
 
   /api/city-details:
     get:
@@ -381,9 +381,9 @@ paths:
           required: true
           example: "Goa"
           description: The location name of the city to search
-      
+
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
@@ -396,27 +396,27 @@ paths:
                   description:
                     type: string
                     example: "Goa is a state on the southwestern coast of India within the region known as the Konkan, and geographically separated from the Deccan highlands by the Western Ghats."
-        '400':
+        "400":
           description: "Bad Request"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response_400'
-        '401':
+                $ref: "#/components/schemas/response_400"
+        "401":
           description: Unauthorized access
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response_401'
-        '404':
+                $ref: "#/components/schemas/response_401"
+        "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response_404'
-        '500':
+                $ref: "#/components/schemas/response_404"
+        "500":
           description: Something went wrong
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response_500'
+                $ref: "#/components/schemas/response_500"

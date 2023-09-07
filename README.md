@@ -12,7 +12,7 @@ Follow the steps in [BE-README](./docs/beRepoDocs/BE-README.md) to setup the bac
 
 # Documentation
 
-All documents releted to travel-planner-ai is in [DOCS](./docs/DOCS-README.md) folder.
+All documents releted to TrippIn is in [DOCS](./docs/DOCS-README.md) folder.
 
 ## License
 
