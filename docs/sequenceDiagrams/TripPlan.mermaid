@@ -1,0 +1,33 @@
+sequenceDiagram
+    title Trippin Flow
+    participant APP as APP
+    participant API as Backend
+
+    note over APP : Enter Trip Details 
+    
+    APP->>API: Get trip plan
+    
+    note left of API: POST: api/trip-suggestion <br> Params: destination, No. of days, start date, activity preferences 
+
+    API-->>APP: return response
+
+    APP->>API: Get destination city details
+    
+    note left of API: GET: api/city-details <br> Params: destination 
+
+    API-->>APP: return response
+
+    APP->>API: Get hotel recommendations
+    
+    note left of API: GET: api/hotels <br> Params: destination, No. of days, start date
+
+    API-->>APP: return response
+
+    alt if Error
+        API-->>APP: return error
+        note over APP: Show Errors
+    end
+
+    note over APP: Show trip plan along with hotel recommendations
+
+
