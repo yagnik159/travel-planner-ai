@@ -4,12 +4,15 @@ An AI platform designed to help individual to plan their trip effortlessly and e
 
 # Frontend
 
-Follow the steps in [FE-README](./docs/feResoDocs/FE-README.md) to setup the frontend project locally.
-
+Follow the steps in [FE-README](./docs/feRepoDocs/FE-README.md) to setup the frontend project locally.
 
 # Backend
 
 Follow the steps in [BE-README](./docs/beRepoDocs/BE-README.md) to setup the backend project locally.
+
+# Documentation
+
+All documents releted to travel-planner-ai is in [DOCS](./docs/DOCS-README.md) folder.
 
 ## License
 
