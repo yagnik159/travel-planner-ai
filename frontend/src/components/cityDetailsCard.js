@@ -30,8 +30,14 @@ function CityDetailsCrad({ destination = "" }) {
   console.log({ cityDetails });
   return (
     <div>
-      <div>{destination}</div>
-      <img src={cityDetails.imageUrl} alt={destination} />
+      <div className="text-2xl sm:text-4xl font-semibold mb-[20px] text-[#1f2937]">
+        {destination}
+      </div>
+      <img
+        src={cityDetails.imageUrl}
+        alt={destination}
+        className="rounded-lg"
+      />
       <div>{cityDetails.description}</div>
     </div>
   );

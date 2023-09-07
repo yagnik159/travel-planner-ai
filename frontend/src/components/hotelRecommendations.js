@@ -37,7 +37,7 @@ function HotelRecommendations(props) {
   if (hotelRecommendations) {
     return (
       <div className="flex flex-col">
-        <div className="text-2xl sm:text-4xl font-semibold mb-8 sm:mb-12 text-[#1f2937]">
+        <div className="font-bold text-[1.5rem] text-[#1f2937] mt-[25px] mb-[20px]">
           Hotel Recommendations
         </div>
         <div>
@@ -55,9 +55,7 @@ function HotelRecommendations(props) {
 
             return (
               <div key={id}>
-                <div>
-                  <img src={image_url} alt={name} className="rounded-lg" />
-                </div>
+                <img src={image_url} alt={name} className="rounded-lg" />
                 <a href={url}>{name}</a>
                 <div>Address: {address}</div>
                 <div>Costs: Approximately {price}</div>
