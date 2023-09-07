@@ -31,6 +31,6 @@ sequenceDiagram
     end
 
     Note over GetHotels: Format response
-    GetHotels -->> Client: Return formatted response
+    GetHotels -->> API: Return formatted response
 
     API -->> Client: Success:200<br>Response: {<br>  "hotel_id": [] ,<br>  "hotel_map_by_id": {}<br>}
