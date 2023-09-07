@@ -11,7 +11,7 @@ export default function Loader({
         width="24"
         height="24"
         viewBox="0 0 24 24"
-        fill="purple"
+        fill="#ec4899"
         xmlns="http://www.w3.org/2000/svg"
         className="purpleSvgIcon"
       >
@@ -90,7 +90,7 @@ export default function Loader({
         />
         <defs>
           <clipPath id="clip0_988_3722">
-            <rect width="24" height="24" fill="purple" />
+            <rect width="24" height="24" fill="#ec4899" />
           </clipPath>
         </defs>
       </svg>

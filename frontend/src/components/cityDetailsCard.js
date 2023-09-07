@@ -27,18 +27,18 @@ function CityDetailsCrad({ destination = "" }) {
 
   if (loading) return <Loader loaderText="" />;
 
-  console.log({ cityDetails });
+  // console.log({ cityDetails });
   return (
     <div>
       <div className="text-2xl sm:text-4xl font-semibold mb-[20px] text-[#1f2937]">
         {destination}
       </div>
       <img
-        src={cityDetails.imageUrl}
+        src={cityDetails && cityDetails.imageUrl}
         alt={destination}
         className="rounded-lg"
       />
-      <div>{cityDetails.description}</div>
+      <div className="mt-[15px]">{cityDetails && cityDetails.description}</div>
     </div>
   );
 }
