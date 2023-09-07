@@ -32,7 +32,8 @@ function HotelRecommendations(props) {
     getHotelRecommendations();
   }, []);
 
-  if (loading) return <Loader loaderText="" />;
+  if (loading)
+    return <Loader loaderText="Fetching hotel reommendations for you..." />;
 
   if (hotelRecommendations) {
     return (
