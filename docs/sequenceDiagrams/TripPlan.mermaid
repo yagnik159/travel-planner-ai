@@ -22,6 +22,12 @@ sequenceDiagram
     note left of API: GET: api/hotels <br> Params: destination, No. of days, start date
 
     API-->>APP: return response
+    
+    APP->>API: search city
+    
+    note left of API: GET: api/search-city <br> Params: q
+
+    API-->>APP: return response
 
     alt if Error
         API-->>APP: return error

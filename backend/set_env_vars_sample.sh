@@ -1,2 +1,9 @@
-export A_PORT = 3000
-export OPENAI_API_KEY = ''
+export A_PORT=3000
+export OPENAI_API_KEY=''
+export AMADEUS_API_KEY=''
+export AMADEUS_API_SECRET=''
+export AMADEUS_BASE_URL='https://test.api.amadeus.com'
+export AMADEUS_ACCESS_TOKEN=''
+export X_RAPID_API_KEY=''
+export X_RAPID_API_HOST='airbnb13.p.rapidapi.com'
+export UNSPLASH_ACCESS_KEY=''

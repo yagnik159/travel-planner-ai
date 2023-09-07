@@ -39,6 +39,6 @@ sequenceDiagram
     end
 
     note over SearchCity: Format response
-    SearchCity -->> Client: Return formatted response
+    SearchCity -->> API: Return formatted response
 
     API -->> Client: Success:200<br>Response: {<br>  "city_id": [] ,<br>  "city_map_by_id": {}<br>}

@@ -159,7 +159,7 @@ export default function Plan() {
         <div className="container mx-auto mb-20 sm:mb-32 mt-10">
           <div className="flex flex-col lg:flex-row gap-16">
             <div className="flex-1 sm:flex-[0_0_55%] sm:mx-auto">
-              <div className="text-2xl sm:text-4xl font-medium mb-8 sm:mb-12 font-IBMPlex">
+              <div className="text-2xl sm:text-4xl font-medium mb-8 sm:mb-12 text-left">
                 Tell us your travel preferences
               </div>
               <form className="flex flex-col gap-10" onSubmit={onFormSubmit}>
@@ -302,7 +302,7 @@ export default function Plan() {
                 <div className="w-full fixed bottom-0 left-0 py-4 border-t-2 bg-white border-gray-300 px-4 flex justify-end">
                   <button
                     type="submit"
-                    className="bg-zinc-900 rounded-lg text-white font-medium py-3 px-8 w-fit text-center flex items-center justify-center gap-2 text-sm sm:text-base hover:opacity-90 transition-all duration-300"
+                    className={`bg-zinc-900 rounded-lg text-white font-medium py-3 px-8 w-fit text-center flex items-center justify-center gap-2 text-sm sm:text-base hover:opacity-90 transition-all duration-300 heroCta`}
                   >
                     Submit
                   </button>
