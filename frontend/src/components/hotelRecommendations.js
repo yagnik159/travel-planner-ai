@@ -56,18 +56,16 @@ function HotelRecommendations(props) {
 
             return (
               <>
-                <div key={id} className="border rounded-lg flex flex-col">
-                  <img
-                    src={image_url}
-                    alt={name}
-                    className="w-full rounded-tl-lg rounded-tr-lg"
-                  />
-                  <div className="p-[15px]">
-                    <a href={url} className="underline">
-                      {name}
-                    </a>
-                    <div>Address: {address}</div>
-                    <div>Costs: Approximately {price}</div>
+                <div key={id} className="border rounded-lg flex items-center">
+                  <img src={image_url} alt={name} className="rounded w-1/2" />
+                  <div className="p-[15px] flex flex-col gap-[10px]">
+                    <div className="text-[20px]">{name}</div>
+                    <div>
+                      Address: <b>{address}</b>
+                    </div>
+                    <div>
+                      Costs: <b>{price}</b> (Approximately)
+                    </div>
                   </div>
                 </div>
               </>
