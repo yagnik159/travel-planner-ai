@@ -221,7 +221,7 @@ input:checked + .fullContainer::before {
   transition: height 0.25s cubic-bezier(0, 0, 0, 1);
 }
 
-.szh-accordion__item--expanded svg {
+.szh-accordion__item--expanded .arrowSvg {
   transform: rotate(180deg);
 }
 

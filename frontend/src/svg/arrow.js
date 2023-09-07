@@ -8,7 +8,7 @@ export default function ArrowSvg() {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      class="w-7 h-7 me-2 ms-0 hs-accordion-active:rotate-180 transition-all duration-300"
+      class="w-7 h-7 me-2 ms-0 hs-accordion-active:rotate-180 transition-all duration-300 arrowSvg"
     >
       <g clip-path="url(#a)">
         <path

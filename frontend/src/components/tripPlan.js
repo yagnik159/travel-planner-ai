@@ -7,7 +7,7 @@ import CityDetailsCard from "@/components/cityDetailsCard";
 
 function TripPlan({ tripPlanRes, formParams }) {
   return (
-    <div className="flex-1 container w-full mx-auto px-[1.5rem] grid grid-cols-2">
+    <div className="flex-1 container w-full mx-auto px-[1.5rem] grid grid-cols-2 gap-[35px]">
       <div className="flex flex-col">
         <CityDetailsCard destination={"Goa, India"} />
         <HotelRecommendations data={formParams} />
@@ -40,7 +40,7 @@ function TripPlan({ tripPlanRes, formParams }) {
                 {day.day_summary}
               </div> */}
 
-              <ol className="relative sm:border-l sm:border-gray-200 sm:ms-1 mt-6">
+              <ol className="relative sm:border-l sm:border-gray-200 sm:ms-1 mt-6 flex flex-col gap-[20px]">
                 {day.activities.map((activity, i) => (
                   <TripActivity activity={activity} />
                 ))}
