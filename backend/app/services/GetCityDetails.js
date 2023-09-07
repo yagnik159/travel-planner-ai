@@ -59,9 +59,19 @@ class GetCityDetails {
     if (responses[0].status_code || responses[1].status_code) {
       return;
     }
-
     oThis.description = responses[0].choices[0].message.content;
+    
+    if(responses[1].statusCode !== 200) {
+      const errorObject = new ErrorResponse(
+        "unsplash_error",
+        responses[1].body,
+        "a_s_s_1",
+        null
+      );
 
+      oThis.res = errorObject.perform();
+      return;
+    }
     const response = JSON.parse(responses[1].body);
 
     oThis.imageUrl = response.results[0].urls.regular;

@@ -94,10 +94,18 @@ class GetHotels {
         }
 
         const httpResponse = await HttpClient.makeGetRequest(getUrl, headers, 10000);
-
-
+        
         if (httpResponse.status_code) {
             oThis.res = response;
+            return;
+        } else if(httpResponse.statusCode != 200){
+            const errorObject = new ErrorResponse(
+                "api_error",
+                httpResponse.body,
+                "a_s_sc_sc_2",
+                []
+            );
+            oThis.res = errorObject.perform();
             return;
         } else {
             oThis.responseBody = JSON.parse(httpResponse.body);
