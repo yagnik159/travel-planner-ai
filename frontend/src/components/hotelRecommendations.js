@@ -36,8 +36,10 @@ function HotelRecommendations(props) {
 
   if (hotelRecommendations) {
     return (
-      <>
-        <div>HotelRecommendations</div>
+      <div className="flex flex-col">
+        <div className="text-2xl sm:text-4xl font-semibold mb-8 sm:mb-12 text-[#1f2937]">
+          Hotel Recommendations
+        </div>
         <div>
           {hotelRecommendations.hotel_id.map((hotelId) => {
             const hotelMapById = hotelRecommendations.hotel_map_by_id || {};
@@ -53,17 +55,17 @@ function HotelRecommendations(props) {
 
             return (
               <div key={id}>
+                <div>
+                  <img src={image_url} alt={name} className="rounded-lg" />
+                </div>
                 <a href={url}>{name}</a>
                 <div>Address: {address}</div>
                 <div>Costs: Approximately {price}</div>
-                <div>
-                  <img src={image_url} alt={name} />
-                </div>
               </div>
             );
           })}
         </div>
-      </>
+      </div>
     );
   }
 

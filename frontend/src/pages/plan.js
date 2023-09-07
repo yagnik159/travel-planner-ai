@@ -134,9 +134,7 @@ export default function Plan() {
     return (
       <>
         <Header />
-        {/* <CityDetailsCrad destination={"Goa, India"} /> */}
-        {/* <TripPlan tripPlanRes={tripPlanRes} /> */}
-        <HotelRecommendations data={formParams} />
+        <TripPlan tripPlanRes={tripPlanRes} formParams={formParams} />
       </>
     );
   }

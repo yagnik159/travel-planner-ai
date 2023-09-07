@@ -220,3 +220,11 @@ input:checked + .fullContainer::before {
 .szh-accordion__item-content {
   transition: height 0.25s cubic-bezier(0, 0, 0, 1);
 }
+
+.szh-accordion__item--expanded svg {
+  transform: rotate(180deg);
+}
+
+.szh-accordion__item-heading {
+  border-bottom: 1px solid #e5e7eb;
+}

@@ -14,7 +14,8 @@ function TripActivity({ activity }) {
     local_time = "",
   } = activity;
   return (
-    <div className="border p-[15px] rounded-md">
+    <li className="sm:ms-6 p-4 rounded-md group border border-gray-200">
+      <div className="hidden sm:block sm:absolute w-3 h-3 bg-gray-200 rounded-full mt-3 -left-1.5 border border-whites"></div>
       <div className="font-medium text-[20px] underline">{location_name}</div>
       <div className="mb-4 font-base text-sm md:text-base svelte-1hpiyon">
         {activity_description}
@@ -37,7 +38,7 @@ function TripActivity({ activity }) {
           </div>
         ) : null}
       </div>
-    </div>
+    </li>
   );
 }
 

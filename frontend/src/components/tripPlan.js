@@ -1,10 +1,13 @@
 import React from "react";
 import TripActivity from "./tripActivity";
 import { Accordion, AccordionItem } from "@szhsin/react-accordion";
+import HotelRecommendations from "./hotelRecommendations";
+import ArrowSvg from "@/svg/arrow";
 
-function TripPlan({ tripPlanRes }) {
+function TripPlan({ tripPlanRes, formParams }) {
   return (
-    <div className="flex-1 container w-full mx-auto sm:flex sm:items-center sm:justify-between px-[1.5rem] flex-col">
+    <div className="flex-1 container w-full mx-auto px-[1.5rem] grid grid-cols-2">
+      <HotelRecommendations data={formParams} />
       <Accordion
         transition
         transitionTimeout={500}
@@ -15,8 +18,15 @@ function TripPlan({ tripPlanRes }) {
             key={i}
             header={
               <div className="text-left">
-                <p className="font-bold text-[1.5rem]">{day.title}</p>
-                <p className="mb-4 text-sm">{day.day_summary}</p>
+                <div className="flex items-center">
+                  <ArrowSvg />
+                  <p className="font-bold text-[1.5rem] text-[#1f2937]">
+                    {day.title}
+                  </p>
+                </div>
+                <p className="mb-4 text-sm ml-[36px] font-semibold text-[#3d3933]">
+                  {day.day_summary}
+                </p>
               </div>
             }
           >
@@ -26,11 +36,11 @@ function TripPlan({ tripPlanRes }) {
                 {day.day_summary}
               </div> */}
 
-              <div>
+              <ol className="relative sm:border-l sm:border-gray-200 sm:ms-1 mt-6">
                 {day.activities.map((activity, i) => (
                   <TripActivity activity={activity} />
                 ))}
-              </div>
+              </ol>
             </div>
           </AccordionItem>
         ))}
