@@ -10,8 +10,8 @@ import SelectOptions from "@/components/options";
 import axios from "axios";
 import TripPlan from "@/components/tripPlan";
 import Loader from "@/components/loader";
-import HotelRecommendations from "@/components/hotelRecommendations";
-import CityDetailsCrad from "@/components/cityDetailsCard";
+// import HotelRecommendations from "@/components/hotelRecommendations";
+// import CityDetailsCrad from "@/components/cityDetailsCrad";
 
 export default function Plan() {
   const [formParams, setFormParams] = useState({

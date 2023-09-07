@@ -7,7 +7,7 @@ import CityDetailsCard from "@/components/cityDetailsCard";
 
 function TripPlan({ tripPlanRes, formParams }) {
   return (
-    <div className="flex-1 container w-full mx-auto px-[1.5rem] grid grid-cols-2 gap-[35px]">
+    <div className="flex-1 container w-full mx-auto px-[1.5rem] grid grid-cols-2 gap-[35px] py-[50px]">
       <div className="flex flex-col">
         <CityDetailsCard destination={"Goa, India"} />
         <HotelRecommendations data={formParams} />
