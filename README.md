@@ -17,3 +17,6 @@ All documents releted to TrippIn is in [DOCS](./docs/DOCS-README.md) folder.
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+
+## PDF to explore more
+[Click here to see](./docs/Prototyping%20presentation.pdf)
